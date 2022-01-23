@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+<!-- -----------------------main body----------------------------- -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <!-- <img src="..." class="rounded me-2" alt="..."> -->
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <h3>Incorrect Password</h3>
+        </div>
+    </div>
+</div>
+<div class="container profile-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h1 class="account-setting-header">Account Settings</h1>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="my-4">
+                    <div class="row mt-5 align-items-center">
+                        <div class="col-md-3 text-center mb-5">
+                            <div class="avatar avatar-xl">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                                <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                <button class="change-picture-btn mt-4">Change Picture</button> -->
+                            </div>
+                            <div class="col-md-12 text-center mb-5">
+                                <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                <button class="change-picture-btn mt-4">Change Picture</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <h2 class="mb-1 editname">Atiq</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ----------------------Your Info------------------ -->
+                    <h2 class="d-flex justify-content-start info-section">Your Info</h2>
+                    <div class="edit-profile-horizontal-line mb-1"></div>
+                    <div class="form-row row">
+                        <div class="my-form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Atiqur" value="" required />
+                        </div>
+                        <div class="my-form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="brown@asher.me" value="" required />
+                        </div>
+                    </div>
+                    <div class="my-form-group">
+                        <div class="form-row row">
+                            <div class="my-form-group col-md-6">
+                                <label for="phoneNo">Phone No</label>
+                                <input type="number" id="phoneNo" name="phoneNo" placeholder="0177.........." value="" />
+                            </div>
+                            <div class="my-form-group col-md-6">
+                                <label for="billing">Billing info</label>
+                                <input type="number" id="billing" name="billing" placeholder="0177........" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------------------------------Password------------------------------- -->
+                    <h2 class="d-flex justify-content-start info-section mt-5">Password</h2>
+                    <div class="edit-profile-horizontal-line mb-1"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="my-form-group">
+                                <label for="oldPassword">Old Password</label>
+                                <input type="password" id="oldPassword" name="oldPass" required />
+                            </div>
+                            <div class="my-form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" name="newPass" />
+                            </div>
+                            <div class="my-form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="conformPassword" name="confirmPass" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-2">Password requirements</p>
+                            <p class="small text-muted mb-2">
+                                To create a new password, you have to meet all of
+                                the
+                                following requirements:
+                            </p>
+                            <ul class="small text-muted pl-4 mb-0">
+                                <li>Minimum 8 character</li>
+                                <li>At least one special character</li>
+                                <li>At least one number</li>
+                                <li>Can’t be the same as a previous password</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="submit" name="submit" class="save-change-btn" />
+                    <button type="button" class="btn btn btn-outline-danger cancel-button"> <a href="dashboard.php#dashboard__overview">Cancel</a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

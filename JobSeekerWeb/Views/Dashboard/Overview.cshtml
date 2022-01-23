@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "Overview";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+<main>
+    <div class="dashboard-main custom--container flex">
+
+        <div class="dashboard__profile">
+            <div class="profile__pic flex">
+                <img src="./images/JS.png" alt="profile picture">
+            </div>
+            <div class="profile__name">
+                <h1>Atiqur</h1>
+            </div>
+            <div class="profile__mail">
+                <h2>ani.atikur99@gmail.com</h2>
+            </div>
+            <div class="profile__job-info flex">
+                <div class="job-info earned">
+                    <h2>Earned</h2>
+                    <h3>4900</h3>
+                    <h4>TAKA</h4>
+                </div>
+                <div class="info-divider"></div>
+                <div class="job-info completed">
+                    <h2>Completed</h2>
+                    <h3>10</h3>
+                    <h4>JOBS</h4>
+                </div>
+                <div class="info-divider"></div>
+                <div class="job-info rated">
+                    <h2>Rated</h2>
+                    <h3>4.9</h3>
+                    <h4>STARS</h4>
+                </div>
+            </div>
+
+            <div class="profile__details">
+                <div>
+                    <input type="checkbox" name="details-accordion" id="acc-details" class="accordion__input" checked>
+
+                    <div class="details flex">
+                        <i class='bx bxs-right-arrow'></i>
+                        <label for="acc-details" class="accordion__label">Details</label>
+                    </div>
+
+                    <div class="accordion-content">
+                        <div class="profile__details-item profile__account-details">
+                            <h3>Account Details</h3>
+                            <h4>Md. Atikur Rahman</h4>
+                            <h4>a@gmail.com</h4>
+                            <h4>01778449968</h4>
+                        </div>
+                        <div class="profile__details-item profile__billing">
+                            <h3>Billing Information</h3>
+                            <h4>01778449968</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div>
+                    <input type="checkbox" name="details-accordion" id="acc-statistics" class="accordion__input">
+
+                    <div class="details flex">
+                        <i class='bx bxs-right-arrow'></i>
+                        <label for="acc-statistics" class="accordion__label">Statistics</label>
+                    </div>
+
+                    <div class="accordion-content">
+                        <div class="profile__details-item profile__account-details">
+                            <h4>Inbox response rate</h4>
+                            <h4>Inbox response time</h4>
+                            <h4>Order completion rate</h4>
+                            <h4>Timely Delivery</h4>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <div class="dashboard__status">
+            <ul class="status-bar flex">
+                <li id="dashboard__overview">
+                    <a href="#dashboard__overview" id="user-overview" class="status-bar__items">Overview</a>
+                    <div class="overview-content">
+                        <div>
+                            <div class="overview-content__bg">
+                                <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" "checked"/>
+                                <div class="overview-label flex">
+                                    <label for="active-orders" class="accordion__label flex">Active Orders</label>
+                                    <i class='bx bxs-right-arrow'></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <!-- nested accordion -->
+                                    <div>
+                                        <div class="overview-nested-content__bg">
+                                            <input type="checkbox" name="status-nested-accordion" id="order1" class="accordion__input">
+                                            <div class="overview-label flex">
+                                                <label for="order1" class="accordion__label flex">lorem ipsum name</label>
+                                                <i class='bx bxs-right-arrow'></i>
+                                            </div>
+                                            <div class="accordion-content">
+                                                lorem ipsum details
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="overview-content__bg">
+                                <input type="checkbox" name="status-accordion" id="current-skills" class="accordion__input">
+                                <div class="overview-label flex">
+                                    <label for="current-skills" class="accordion__label flex">Applied Jobs</label>
+                                    <i class='bx bxs-right-arrow'></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <!-- nested accordion -->
+                                    
+                                    <div>
+                                        <div class="overview-nested-content__bg">
+                                            <input type="checkbox" name="status-nested-accordion" id="applied1" class="accordion__input">
+                                            <div class="overview-label flex">
+                                                <label for="applied1" class="accordion__label flex">lorem ipsum name</label>
+                                                <i class='bx bxs-right-arrow'></i>
+                                            </div>
+                                            <div class="accordion-content">
+                                                lorem ipsum details
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- <li id="dashboard__history">
+                    <a href="#dashboard__history" id="transaction-history" class="status-bar__items">History</a>
+                    <div class="history-content">
+                        hello
+                    </div>
+                </li> -->
+
+                <li id="dashboard__acc-details">
+                    <a href="#dashboard__acc-details" id="user__acc-details" class="status-bar__items">
+                        Personal
+                        Information
+                    </a>
+                    <div class="user__info-content">
+                        <div>
+                            <div class="overview-content__bg">
+                                <input type="checkbox" name="status-accordion" id="user__info-details" class="accordion__input" checked>
+                                <div class="overview-label flex">
+                                    <label for="user__info-details" class="accordion__label flex">Details</label>
+                                    <i class='bx bxs-right-arrow'></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <!-- nested accordion -->
+                                    <div>
+                                        <div class="overview-nested-content__bg">
+                                            <input type="checkbox" name="status-nested-accordion" id="acc--details" class="accordion__input" checked>
+                                            <div class="overview-label flex">
+                                                <label for="acc--details" class="accordion__label flex">
+                                                    Account
+                                                    Details
+                                                </label>
+                                                <i class='bx bxs-right-arrow'></i>
+                                            </div>
+                                            <div class="accordion-content">
+                                                <h4>lorem name</h4>
+                                                <h4>lorem email</h4>
+                                                <h4>lorem phone no</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="overview-nested-content__bg">
+                                            <input type="checkbox" name="status-nested-accordion" id="bill--info" class="accordion__input">
+                                            <div class="overview-label flex">
+                                                <label for="bill--info" class="accordion__label flex">
+                                                    Billing
+                                                    Information
+                                                </label>
+                                                <i class='bx bxs-right-arrow'></i>
+                                            </div>
+                                            <div class="accordion-content">
+                                                <h4>lorem billing</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div>
+                            <div class="overview-content__bg">
+                                <input type="checkbox" name="status-accordion" id="user__info-statistics" class="accordion__input">
+                                <div class="overview-label flex">
+                                    <label for="user__info-statistics" class="accordion__label flex">Statistics</label>
+                                    <i class='bx bxs-right-arrow'></i>
+                                </div>
+                                <div class="accordion-content stats">
+                                    <h4>Inbox response rate</h4>
+                                    <h4>Inbox response time</h4>
+                                    <h4>Order completion rate</h4>
+                                    <h4>Timely Delivery</h4>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+<!-- ---------------------------------Toast------------------------------- -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <h4 class="me-auto mb-0">Login successful</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <h3>Successfully Logged In</h3>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToastNoOrder" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <h4 class="me-auto mb-0">You have no active orders</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <h3>Please apply for suitable jobs<br>for start earning</h3>
+        </div>
+    </div>
+</div>

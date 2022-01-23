@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<!-- -----------------Toast------------------------- -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <!-- <img src="..." class="rounded me-2" alt="..."> -->
+            <h4 class="me-auto mb-0">Login Failed</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <h3>Please enter correctly</h3>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToastBan" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <!-- <img src="..." class="rounded me-2" alt="..."> -->
+            <h4 class="me-auto mb-0">You have been banned</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <h3>Contact our support for <br> more information</h3>
+        </div>
+    </div>
+</div>
+
+<div class="signin-page">
+    <div class="left">
+        <div class="arrow-left">
+            <i class="fa fa-arrow-left fa-3x"></i>
+        </div>
+        <div class="vertical-signin-text">
+            SIGN IN
+        </div>
+        <div class="text-wrapper">
+            <div class="job-seeker">
+                <h1 class="job">JOB</h1>
+                <h1 class="seeker">seeker</h1>
+            </div>
+            <div class="description">
+                <p>The First Freelancing<br>Platform in Bangladesh.</p>
+            </div>
+            <div class="footer-text">
+                <p>Discover true talent, or become one.</p>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="signup-reminder">
+            <p class="p1">Not a member?</p>
+            <a class="p2" href="/User/SignUp">Sign up now?</a>
+        </div>
+        <div class="form-wrapper">
+            <div class="signin-header">
+                <h1>Sign in to Job Seeker</h1>
+            </div>
+            <button class="signin-with-google-button">
+                <i class="google-icon fab fa-google"></i>
+                Sign in with Google
+            </button>
+            <div class="or-with-line">
+                <p>Or</p>
+            </div>
+            <form method="POST" class="custom-form">
+                <div class="custom-form-group">
+                    <label class="form-label" for="username">Username or Email Address</label>
+                    <input type="text" class="custom-input" name="username" id="username" aria-describedby="emailHelp" placeholder="ani.atikur99@gmail.com" required>
+                    <div class="line"></div>
+                </div>
+                <div class="custom-form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="custom-input" id="password" name="password" aria-describedby="passwordHelp" required>
+                    <div class="line"></div>
+                </div>
+                <button type="submit" class="form-custom-button">Sign in</button>
+            </form>
+        </div>
+    </div>
+
