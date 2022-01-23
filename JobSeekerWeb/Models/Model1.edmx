@@ -11,13 +11,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="jobseekerWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="jobseekerWebEntities1" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="jobseekerWebEntities" annotation:LazyLoadingEnabled="true" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities1" />
+        <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities" />
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
