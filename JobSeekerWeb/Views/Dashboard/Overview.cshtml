@@ -1,7 +1,17 @@
 ﻿
+@model Object
 @{
     ViewBag.Title = "Overview";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+
+    var x = ((JobSeekerWeb.CustomUtils.SessionObject)Model).get("id");
+
+    string name = Session["name"].ToString();
+    string user_name = Session["user_name"].ToString();
+    string mail = Session["mail"].ToString();
+    string phone_no = Session["phone_no"].ToString();
+    string billind_info = Session["billind_info"].ToString();
+    string picture = Session["picture"].ToString();
 }
 <main>
     <div class="dashboard-main custom--container flex">
@@ -11,10 +21,10 @@
                 <img src="./images/JS.png" alt="profile picture">
             </div>
             <div class="profile__name">
-                <h1>Atiqur</h1>
+                <h1>@name</h1>
             </div>
             <div class="profile__mail">
-                <h2>ani.atikur99@gmail.com</h2>
+                <h2>@mail</h2>
             </div>
             <div class="profile__job-info flex">
                 <div class="job-info earned">
@@ -48,13 +58,13 @@
                     <div class="accordion-content">
                         <div class="profile__details-item profile__account-details">
                             <h3>Account Details</h3>
-                            <h4>Md. Atikur Rahman</h4>
-                            <h4>a@gmail.com</h4>
-                            <h4>01778449968</h4>
+                            <h4>@user_name</h4>
+                            <h4>@mail</h4>
+                            <h4>@phone_no</h4>
                         </div>
                         <div class="profile__details-item profile__billing">
                             <h3>Billing Information</h3>
-                            <h4>01778449968</h4>
+                            <h4>@billind_info</h4>
                         </div>
                     </div>
                 </div>
