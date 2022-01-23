@@ -13,10 +13,10 @@ namespace JobSeekerWeb.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class jobseekerWebEntities : DbContext
+    public partial class jobseekerWebEntities1 : DbContext
     {
-        public jobseekerWebEntities()
-            : base("name=jobseekerWebEntities")
+        public jobseekerWebEntities1()
+            : base("name=jobseekerWebEntities1")
         {
         }
     
