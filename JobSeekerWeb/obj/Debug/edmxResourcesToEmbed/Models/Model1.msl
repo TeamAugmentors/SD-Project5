@@ -1,4 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities" />
+  <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities">
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="jobseekerWebModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="ban" ColumnName="ban" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="billing_info" ColumnName="billing_info" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="freelancers">
+      <EntityTypeMapping TypeName="jobseekerWebModel.freelancer">
+        <MappingFragment StoreEntitySet="freelancer">
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="completed" ColumnName="completed" />
+          <ScalarProperty Name="earned" ColumnName="earned" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hirers">
+      <EntityTypeMapping TypeName="jobseekerWebModel.hirer">
+        <MappingFragment StoreEntitySet="hirer">
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="hired" ColumnName="hired" />
+          <ScalarProperty Name="spent" ColumnName="spent" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
 </Mapping>

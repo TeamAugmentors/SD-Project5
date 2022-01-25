@@ -4,20 +4,157 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="jobseekerWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="jobseekerWebModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="jobseekerWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'jobseekerWeb.dbo.freelancer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="freelancer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="earned" />
+            <PropertyRef Name="completed" />
+            <PropertyRef Name="rating" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="earned" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="completed" Type="int" Nullable="false" />
+          <Property Name="rating" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'jobseekerWeb.dbo.hirer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="hirer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="spent" />
+            <PropertyRef Name="hired" />
+            <PropertyRef Name="rating" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="spent" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="hired" Type="int" Nullable="false" />
+          <Property Name="rating" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="phone_no" Type="varchar" MaxLength="11" />
+          <Property Name="billing_info" Type="varchar" MaxLength="11" />
+          <Property Name="picture" Type="varchar" MaxLength="200" />
+          <Property Name="ban" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="jobseekerWebModelStoreContainer">
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="freelancer" EntityType="Self.freelancer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [freelancer].[id] AS [id], 
+    [freelancer].[earned] AS [earned], 
+    [freelancer].[completed] AS [completed], 
+    [freelancer].[rating] AS [rating]
+    FROM [dbo].[freelancer] AS [freelancer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="hirer" EntityType="Self.hirer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [hirer].[id] AS [id], 
+    [hirer].[spent] AS [spent], 
+    [hirer].[hired] AS [hired], 
+    [hirer].[rating] AS [rating]
+    FROM [dbo].[hirer] AS [hirer]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="jobseekerWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="jobseekerWebEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="jobseekerWebEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="users" EntityType="jobseekerWebModel.user" />
+          <EntitySet Name="freelancers" EntityType="jobseekerWebModel.freelancer" />
+          <EntitySet Name="hirers" EntityType="jobseekerWebModel.hirer" />
+        </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="phone_no" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="billing_info" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="picture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ban" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="freelancer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="earned" />
+            <PropertyRef Name="completed" />
+            <PropertyRef Name="rating" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="earned" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="completed" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="hirer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="spent" />
+            <PropertyRef Name="hired" />
+            <PropertyRef Name="rating" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="spent" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="hired" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities" />
+        <EntityContainerMapping StorageEntityContainer="jobseekerWebModelStoreContainer" CdmEntityContainer="jobseekerWebEntities" >
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="jobseekerWebModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="ban" ColumnName="ban" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="billing_info" ColumnName="billing_info" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="freelancers">
+            <EntityTypeMapping TypeName="jobseekerWebModel.freelancer">
+              <MappingFragment StoreEntitySet="freelancer">
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
+                <ScalarProperty Name="earned" ColumnName="earned" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hirers">
+            <EntityTypeMapping TypeName="jobseekerWebModel.hirer">
+              <MappingFragment StoreEntitySet="hirer">
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="hired" ColumnName="hired" />
+                <ScalarProperty Name="spent" ColumnName="spent" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

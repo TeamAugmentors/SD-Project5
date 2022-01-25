@@ -19,3 +19,14 @@ JobSeekerWeb/bin/JobSeekerWeb.dll
 JobSeekerWeb/bin/JobSeekerWeb.dll.config
 JobSeekerWeb/Web.config
 .vs/JobSeekerWeb/v17/.suo
+.vs/JobSeekerWeb/config/applicationhost.config
+JobSeekerWeb/bin/JobSeekerWeb.dll.config
+JobSeekerWeb/Models/Model1.Context.cs
+JobSeekerWeb/Models/Model1.Designer.cs
+JobSeekerWeb/Models/Model1.edmx
+JobSeekerWeb/Models/Model1.edmx.diagram
+JobSeekerWeb/obj/Debug/edmxResourcesToEmbed/Models/Model1.csdl
+JobSeekerWeb/obj/Debug/edmxResourcesToEmbed/Models/Model1.ssdl
+JobSeekerWeb/obj/Debug/TempPE/Models.Model1.Context.cs.dll
+JobSeekerWeb/obj/Debug/TempPE/Models.Model1.cs.dll
+JobSeekerWeb/obj/Debug/TempPE/Models.Model1.Designer.cs.dll

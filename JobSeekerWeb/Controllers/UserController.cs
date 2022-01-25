@@ -11,8 +11,8 @@ namespace JobSeeker.Controllers
 {
     public class UserController : Controller
     {
-        //jobseekerWebEntities db = new jobseekerWebEntities();
-        jobseekerWebEntities2 db = new jobseekerWebEntities2();
+        jobseekerWebEntities db = new jobseekerWebEntities();
+        //jobseekerWebEntities2 db = new jobseekerWebEntities2();
         // GET: User
         [HttpPost]
         public ActionResult SignIn(user user)

@@ -25,5 +25,8 @@ namespace JobSeekerWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<freelancer> freelancers { get; set; }
+        public virtual DbSet<hirer> hirers { get; set; }
     }
 }

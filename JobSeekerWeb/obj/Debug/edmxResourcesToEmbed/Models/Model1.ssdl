@@ -1,4 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="jobseekerWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="jobseekerWebModelStoreContainer" />
+<Schema Namespace="jobseekerWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'jobseekerWeb.dbo.freelancer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="freelancer">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="earned" />
+      <PropertyRef Name="completed" />
+      <PropertyRef Name="rating" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="earned" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="completed" Type="int" Nullable="false" />
+    <Property Name="rating" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'jobseekerWeb.dbo.hirer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="hirer">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="spent" />
+      <PropertyRef Name="hired" />
+      <PropertyRef Name="rating" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="spent" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="hired" Type="int" Nullable="false" />
+    <Property Name="rating" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="phone_no" Type="varchar" MaxLength="11" />
+    <Property Name="billing_info" Type="varchar" MaxLength="11" />
+    <Property Name="picture" Type="varchar" MaxLength="200" />
+    <Property Name="ban" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="jobseekerWebModelStoreContainer">
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="freelancer" EntityType="Self.freelancer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [freelancer].[id] AS [id], 
+    [freelancer].[earned] AS [earned], 
+    [freelancer].[completed] AS [completed], 
+    [freelancer].[rating] AS [rating]
+    FROM [dbo].[freelancer] AS [freelancer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="hirer" EntityType="Self.hirer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [hirer].[id] AS [id], 
+    [hirer].[spent] AS [spent], 
+    [hirer].[hired] AS [hired], 
+    [hirer].[rating] AS [rating]
+    FROM [dbo].[hirer] AS [hirer]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
 </Schema>
