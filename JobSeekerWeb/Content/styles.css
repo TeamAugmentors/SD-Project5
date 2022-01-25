@@ -5,7 +5,7 @@
     font-family: "fresh";
     src: url("../fonts/FreshEaters.ttf");
 }
-/*CUSTOM VARIABLES*/
+/*CUSTOM VARIABLES DECLARED*/
 :root {
     font-size: 62.5%;
     --transparent_white_less: rgba(255, 255, 255, 0.2);
