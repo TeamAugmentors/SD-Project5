@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "CreateJob";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<main>
+    <div class="my-jobs-main">
+        <h3 class="title">
+            Create a New Job
+        </h3>
+        <div class="grid create-job">
+
+            @{Html.RenderPartial("CreateJobForm");}
+
+        </div>
+    </div>
+</main>
+

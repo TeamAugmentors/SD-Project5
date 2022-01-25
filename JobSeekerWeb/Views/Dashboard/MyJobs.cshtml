@@ -1,0 +1,31 @@
+﻿@model Object
+@{
+    ViewBag.Title = "MyJobs";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model);
+}
+
+<main>
+    <div class="my-jobs-main">
+        <h3 class="title">
+            My Jobs
+        </h3>
+        <div class="grid">
+             
+            @{
+                for (int i = 0; i < 12; i++)
+                {
+                    Html.RenderPartial("MyJobsCard");
+                }
+            }
+
+        </div>
+    </div>
+</main>
+<!-- ---------------------------------Toast------------------------------- -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+<script src="js/script.js"></script>
+
+

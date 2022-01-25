@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "JobApplications";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<main>
+    <div class="my-jobs-main">
+        <h3 class="title">
+            Job Applications
+        </h3>
+        <div class="grid job-applications">
+
+        @{for (int i = 0; i < 12; i++)
+            {
+                Html.RenderPartial("JobApplicationsCard"); 
+            }}
+
+        </div>
+    </div>
+</main>
+

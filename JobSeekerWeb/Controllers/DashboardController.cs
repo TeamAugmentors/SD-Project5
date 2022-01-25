@@ -21,8 +21,21 @@ namespace JobSeeker.Controllers
             //string billind_info = Session["billind_info"].ToString();
             //string picture = Session["picture"].ToString();
 
-            CustomSession.GetSession().set("id", "10");
+            return View((Object)CustomSession.GetSession());
+        }
 
+        public ActionResult MyJobs()
+        {
+            return View((Object)CustomSession.GetSession());
+        }
+
+        public ActionResult JobApplications()
+        {
+            return View((Object)CustomSession.GetSession());
+        }
+
+        public ActionResult CreateJob()
+        {
             return View((Object)CustomSession.GetSession());
         }
     }
