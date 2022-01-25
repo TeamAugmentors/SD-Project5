@@ -9,12 +9,30 @@ namespace JobSeekerWeb.CustomUtils
     {
         private Dictionary<string, string> Map = new Dictionary<string, string>();
 
-        public void set(string key, string value)
-        {
-            Map[key] = value;   
+        public void set(string key, object value)
+        {   
+            String strValue = value.ToString();
+            Map[key] = strValue;   
         }
 
-        public string get(string key)
+        public void set(String[] keys, Object[] values)
+        {
+           for (int i = 0; i < keys.Length; i++)
+            {
+                String key = keys[i];
+                String value = "";
+                if (values[i] != null)
+                {
+                    value = values[i].ToString();
+                }
+ 
+                Map[key] = value;
+            }
+        }
+
+        public string[] getAll() => Map.Keys.ToArray();
+
+        public string get(string key) 
         {
             return Map[key];
         }

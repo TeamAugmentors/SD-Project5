@@ -4,14 +4,14 @@
     ViewBag.Title = "Overview";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 
-    var x = ((JobSeekerWeb.CustomUtils.SessionObject)Model).get("id");
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model);
 
-    string name = Session["name"].ToString();
-    string user_name = Session["user_name"].ToString();
-    string mail = Session["mail"].ToString();
-    string phone_no = Session["phone_no"].ToString();
-    string billind_info = Session["billind_info"].ToString();
-    string picture = Session["picture"].ToString();
+    string name = session.get("name");
+    string user_name = session.get("username");
+    string mail = session.get("mail");
+    string phone_no = session.get("phoneNo");
+    string billind_info = session.get("billingInfo");
+    string picture = session.get("picture");
 }
 <main>
     <div class="dashboard-main custom--container flex">
@@ -44,6 +44,16 @@
                     <h3>4.9</h3>
                     <h4>STARS</h4>
                 </div>
+            </div>
+
+            <div class="myjobs-container">
+                <li>
+                    <button onclick="location.href='/Dashboard/MyJobs'">My Jobs</button>
+                </li>
+
+                <li>
+                    <button onclick="location.href='/Dashboard/CreateJob'"><i class="far fa-plus-square"></i> Create Job</button>
+                </li>
             </div>
 
             <div class="profile__details">
@@ -94,13 +104,15 @@
         <div class="profile-divider"></div>
 
         <div class="dashboard__status">
+
             <ul class="status-bar flex">
+
                 <li id="dashboard__overview">
                     <a href="#dashboard__overview" id="user-overview" class="status-bar__items">Overview</a>
                     <div class="overview-content">
                         <div>
                             <div class="overview-content__bg">
-                                <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" "checked"/>
+                                <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" "checked" />
                                 <div class="overview-label flex">
                                     <label for="active-orders" class="accordion__label flex">Active Orders</label>
                                     <i class='bx bxs-right-arrow'></i>
@@ -119,8 +131,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -133,7 +143,7 @@
                                 </div>
                                 <div class="accordion-content">
                                     <!-- nested accordion -->
-                                    
+
                                     <div>
                                         <div class="overview-nested-content__bg">
                                             <input type="checkbox" name="status-nested-accordion" id="applied1" class="accordion__input">
@@ -154,12 +164,23 @@
                     </div>
                 </li>
 
+                <li>
+                    <a class="status-bar__items" href="/Dashboard/MyJobs">My Jobs</a>
+                </li>
+
+                <li>
+                    <button onclick='location.href="/Dashboard/CreateJob"'><i class="far fa-plus-square"></i> Create Job</a></button>
+                </li>
+
+
                 <!-- <li id="dashboard__history">
                     <a href="#dashboard__history" id="transaction-history" class="status-bar__items">History</a>
                     <div class="history-content">
                         hello
                     </div>
                 </li> -->
+
+
 
                 <li id="dashboard__acc-details">
                     <a href="#dashboard__acc-details" id="user__acc-details" class="status-bar__items">

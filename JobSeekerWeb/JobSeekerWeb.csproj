@@ -211,8 +211,8 @@
     <Content Include="images\tie2.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -267,6 +267,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\FooterLayout.cshtml" />
     <Content Include="Views\Shared\_CustomLayout.cshtml" />
+    <Content Include="Views\Dashboard\MyJobs.cshtml" />
+    <Content Include="Views\Shared\MyJobsCard.cshtml" />
+    <Content Include="Views\Dashboard\JobApplications.cshtml" />
+    <Content Include="Views\Shared\JobApplicationsCard.cshtml" />
+    <Content Include="Views\Dashboard\CreateJob.cshtml" />
+    <Content Include="Views\Shared\CreateJobForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
