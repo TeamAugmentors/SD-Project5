@@ -1,0 +1,43 @@
+﻿@model JobSeekerWeb.Models.job
+
+<div class="job-card">
+    <div class="job-card-header">
+        <h1 class="catagory">@Model.category</h1>
+        <h1 class="job-name">@Model.name</h1>
+        <div class="amount-div">
+            <div class="tk-icon">
+                <img src="~/images/taka-bw.svg" alt="">
+            </div>
+            <h1 class="amount">@Model.salary</h1>
+        </div>
+        <div class="line"></div>
+        <div class="details">
+            <div class="duration">
+                <div class="details-left">Duration</div>
+                <div class="details-right">
+                    @DateTime.Today.Subtract(Model.duration).Days Days
+                </div>
+            </div>
+            <div class="revisions">
+                <div class="details-left">revisions</div>
+                <div class="details-right">
+                    4
+                </div>
+            </div>
+            <div class="negotiable">
+                <div class="details-left">Negotiable</div>
+                <div class="details-right">
+                    @(Model.negotiable == 1 ? "Yes" : "No")
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <p>@Model.details</p>
+        </div>
+        <form action="productDetails.php" method="GET">
+            <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+            <button class="card-button">See More</button>
+        </form>
+        <!--<div class="card-button">Applied!</div> -->
+    </div>
+</div>

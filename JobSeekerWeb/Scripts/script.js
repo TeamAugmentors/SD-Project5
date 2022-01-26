@@ -64,8 +64,8 @@ else if (document.URL.includes("Explore/Jobs")) {
   console.log(inputTkMax);
   let isLeftThumb = false;
   let isRightThumb = false;
-  let thumbposLeft = 2;
-  let thumbposRight = 98;
+  let thumbposLeft = 0;
+  let thumbposRight = 100;
 
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;

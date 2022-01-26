@@ -1,7 +1,18 @@
 ﻿
+@model Object[]
 @{
     ViewBag.Title = "Jobs";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
+    var jobList = (List<JobSeekerWeb.Models.job>)Model[1];
+
+    string name = session.get("name");
+    string user_name = session.get("username");
+    string mail = session.get("mail");
+    string phone_no = session.get("phoneNo");
+    string billind_info = session.get("billingInfo");
+    string picture = session.get("picture");
 }
 
 <div class="explore-container">
@@ -10,21 +21,29 @@
             <div class="freelancer-dashboard">
                 <div class="freelancer-info">
                     <div class="picture">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic" />
-                        <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic"> -->
+                        @{
+                            if (picture != null)
+                            {
+                                <img src="~/DatabaseImg/@picture" alt="profile-pic" />
+                            }
+                            else
+                            {
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic" />
+                            }
+                        }
                     </div>
                     <div class="text-section">
                         <div class="name">
-                            <h1>Atiqur</h1>
+                            <h1>@name</h1>
                         </div>
                         <div class="acc-setting-text">
-                            <a href="dashboard.php">Go to Account Settings</a>
+                            <a href="/Dashboard/Overview#dashboard__overview">Go to Account Settings</a>
                         </div>
                     </div>
                 </div>
                 <div class="horizontal-line"></div>
                 <!-- --------------budget------------- -->
-                <form action="" method="GET">
+                <form action="/Explore/Jobs" method="post">
                     <div class="budget-div">
                         <div class="heading">
                             <div class="icon-tk">
@@ -119,351 +138,14 @@
                     <div class="line"></div>
                 </div>
                 <div class="job-card-container">
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Graphics</h1>
-                            <h1 class="job-name">Illustration</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2000</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                        3 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                        Yes
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Illustration is very nice</p>
-                            </div>
-                            <form action="productDetails.php" method="GET">
-                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                <button class="card-button">See More</button>
-                            </form>
-                            <!--<div class="card-button">Applied!</div> -->
-                        </div>
-                    </div>
+                    @{
+                        foreach (var card in jobList)
+                        {
+                            Html.RenderPartial("JobBoardCard", card);
+                        }
+                    }
                 </div>
             </div>
-            <!-- --------------------my job cards----------------------- -->
-            <div class="custom-container">
-                <div class="header">
-                    <h1>My posts</h1>
-                    <div class="line"></div>
-                </div>
-                <div class="job-card-container">
-                    <div class="job-card">
-                        <div class="job-card-header">
-                            <h1 class="catagory">Programming</h1>
-                            <h1 class="job-name">JavaScript</h1>
-                            <div class="amount-div">
-                                <div class="tk-icon">
-                                    <img src="~/images/taka-bw.svg" alt="">
-                                </div>
-                                <h1 class="amount">2400</h1>
-                            </div>
-                            <div class="line"></div>
-                            <div class="details">
-                                <div class="duration">
-                                    <div class="details-left">Duration</div>
-                                    <div class="details-right">
-                                       10 Days
-                                    </div>
-                                </div>
-                                <div class="revisions">
-                                    <div class="details-left">revisions</div>
-                                    <div class="details-right">4</div>
-                                </div>
-                                <div class="negotiable">
-                                    <div class="details-left">Negotiable</div>
-                                    <div class="details-right">
-                                       No
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>Programming is very hard</p>
-                            </div>
-                            <div class="mt-5"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- -----------------------Toast------------------------- -->
-<!-- -----------------Toast------------------------- -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToastApplied" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <h4 class="me-auto mb-0">Job Application Successful</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            <h3>You will be notified when you<br> get accepted by the hirer</h3>
-        </div>
-    </div>
-</div>
-
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToastNoCard" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <!-- <img src="..." class="rounded me-2" alt="..."> -->
-            <h4 class="me-auto mb-0">Messege</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            <h3>No job card found</h3>
         </div>
     </div>
 </div>

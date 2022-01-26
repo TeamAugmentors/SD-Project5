@@ -18,7 +18,16 @@
 
         <div class="dashboard__profile">
             <div class="profile__pic flex">
-                <img src="~/DatabaseImg/@picture" alt="profile picture">
+                @{
+                    if (picture != null)
+                    {
+                        <img src="~/DatabaseImg/@picture" alt="profile picture">
+                    }
+                    else
+                    {
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture">
+                    }
+                }
             </div>
             <div class="profile__name">
                 <h1>@name</h1>

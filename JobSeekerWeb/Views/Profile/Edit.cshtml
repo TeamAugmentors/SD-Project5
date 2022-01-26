@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
-
+    
 }
 <!-- -----------------------main body----------------------------- -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -26,9 +26,18 @@
                     <div class="row mt-5 align-items-center">
                         <div class="col-md-3 text-center mb-5">
                             <div class="avatar avatar-xl">
-                                <img src="~/DatabaseImg/@Model.picture" alt="..." class="avatar-img rounded-circle" />
+                                @{
+                                    if (Model.picture == null)
+                                    {
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/DatabaseImg/@Model.picture" alt="..." class="avatar-img rounded-circle" />
+                                    }
+                                }
                                 <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
-                                <button class="change-picture-btn mt-4">Change Picture</button> -->
+    <button class="change-picture-btn mt-4">Change Picture</button> -->
                             </div>
                             <div class="col-md-12 text-center mb-5">
                                 <input type="file" class="choose-image" name="userImg" accept="image/x-png,image/gif,image/jpeg" hidden />
