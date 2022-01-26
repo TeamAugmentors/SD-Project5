@@ -14,7 +14,7 @@ namespace JobSeeker.Controllers
         jobseekerWebEntities db = new jobseekerWebEntities();
         int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
 
-        
+
         public ActionResult Edit()
         {
             user tempUser = db.users.Where(temp => temp.id == id).SingleOrDefault();
@@ -37,22 +37,20 @@ namespace JobSeeker.Controllers
                     userImg.SaveAs(pathToSave);
                     tempUser.picture = fileName;
                 }
-                if (confirmPass == user.password)
-                {
-                    
-                    tempUser.name = user.name;
-                    tempUser.mail = user.mail;
-                    tempUser.phone_no = user.phone_no;
-                    tempUser.billing_info = user.billing_info;
-                    
 
-                    tempUser.password = user.password != null ? user.password : tempUser.password ;
+                tempUser.name = user.name;
+                tempUser.mail = user.mail;
+                tempUser.phone_no = user.phone_no;
+                tempUser.billing_info = user.billing_info;
 
 
-                    db.SaveChanges();
+                tempUser.password = user.password ?? tempUser.password;
 
-                    return Redirect("/Dashboard/Overview#dashboard__overview");
-                }
+                JobSeekerWeb.CustomUtils.CustomSession.GetSession().set("picture", tempUser.picture);
+
+                db.SaveChanges();
+
+                return Redirect("/Dashboard/Overview#dashboard__overview");
             }
             return View(tempUser);
         }
