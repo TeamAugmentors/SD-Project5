@@ -34,8 +34,8 @@
         <div class="description">
             <p>@Model.details</p>
         </div>
-        <form action="productDetails.php" method="GET">
-            <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+        <form action="/Explore/JobDetails" method="GET">
+            <input type="submit" class="card-button" value=@Model.id name="job_id" style="display:none"/>
             <button class="card-button">See More</button>
         </form>
         <!--<div class="card-button">Applied!</div> -->

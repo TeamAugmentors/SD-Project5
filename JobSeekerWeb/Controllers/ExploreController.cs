@@ -36,9 +36,13 @@ namespace JobSeeker.Controllers
             return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
         }
 
-        public ActionResult JobDetails()
+        [Route("Explore/JobDetails/{job_id}")]
+        [HttpGet]
+        public ActionResult JobDetails(int? job_id)
         {
-            return View();
+            var card = db.jobs.Where(temp => temp.id == job_id).SingleOrDefault();
+
+            return View(card);
         }
     }
 }
