@@ -36,9 +36,7 @@ namespace JobSeeker.Controllers
             return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
         }
 
-        [Route("Explore/JobDetails/{job_id}")]
-        [HttpGet]
-        public ActionResult JobDetails(int? job_id)
+    public ActionResult JobDetails(int? job_id)
         {
             var card = db.jobs.Where(temp => temp.id == job_id).SingleOrDefault();
 
