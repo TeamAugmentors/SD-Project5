@@ -24,6 +24,19 @@ CREATE TABLE hirer (
   rating varchar NOT NULL DEFAULT 0
 )
 
+CREATE TABLE job (
+  id int NOT NULL,
+  posted_by int NOT NULL,
+  accepted_by int DEFAULT NULL,
+  category varchar NOT NULL,
+  name varchar(30) NOT NULL,
+  salary int NOT NULL,
+  duration datetime NOT NULL,
+  details text NOT NULL,
+  negotiable int NOT NULL,
+  preferred_skills varchar(30) NOT NULL
+)
+
 SELECT * FROM users
 SELECT * FROM freelancer
 SELECT * FROM hirer
