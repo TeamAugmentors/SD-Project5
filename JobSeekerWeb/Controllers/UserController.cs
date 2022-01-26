@@ -35,15 +35,8 @@ namespace JobSeeker.Controllers
                     CustomSession.GetSession().set(new String[]{ "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture"} ,
                         new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture });
 
-                    //CustomSession.session.set("id", x.id);
-                    //CustomSession.session.set("name", x.name);
-                    //CustomSession.session.set("mail", x.mail);
-                    //CustomSession.session.set("username", x.user_name);
-                    //CustomSession.session.set("phoneNo", x.phone_no);
-                    //CustomSession.session.set("billingInfo", x.billing_info);
-                    //CustomSession.session.set("picture", x.picture);
-
-                    Response.Redirect("/Dashboard/Overview");
+                   
+                    Response.Redirect("/Dashboard/Overview#dashboard__overview");
                 }
             }
             return View();

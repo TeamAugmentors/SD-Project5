@@ -34,7 +34,10 @@ namespace JobSeekerWeb.CustomUtils
 
         public string get(string key) 
         {
-            return Map[key];
+            if (Map.ContainsKey(key))
+                return Map[key];
+            else
+                return null;
         }
 
         public void clear()

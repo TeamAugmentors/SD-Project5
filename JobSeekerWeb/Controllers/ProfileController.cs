@@ -1,5 +1,7 @@
-﻿using System;
+﻿using JobSeekerWeb.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,9 +11,50 @@ namespace JobSeeker.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
+        jobseekerWebEntities db = new jobseekerWebEntities();
+        int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
+
+        
         public ActionResult Edit()
         {
-            return View();
+            user tempUser = db.users.Where(temp => temp.id == id).SingleOrDefault();
+
+            return View(tempUser);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(user user, HttpPostedFileBase userImg, string confirmPass)
+        {
+            user tempUser = db.users.Where(temp => temp.id == id).SingleOrDefault();
+            if (ModelState.IsValid)
+            {
+                if (userImg != null)
+                {
+                    var fileName = Path.GetFileName(userImg.FileName);
+                    var directoryToSave = Server.MapPath(Url.Content("~/DatabaseImg"));
+
+                    var pathToSave = Path.Combine(directoryToSave, fileName);
+                    userImg.SaveAs(pathToSave);
+                    tempUser.picture = fileName;
+                }
+                if (confirmPass == user.password)
+                {
+                    
+                    tempUser.name = user.name;
+                    tempUser.mail = user.mail;
+                    tempUser.phone_no = user.phone_no;
+                    tempUser.billing_info = user.billing_info;
+                    
+
+                    tempUser.password = user.password != null ? user.password : tempUser.password ;
+
+
+                    db.SaveChanges();
+
+                    return Redirect("/Dashboard/Overview#dashboard__overview");
+                }
+            }
+            return View(tempUser);
         }
     }
 }

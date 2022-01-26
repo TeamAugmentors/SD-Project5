@@ -1,7 +1,8 @@
-﻿
+﻿@model JobSeekerWeb.Models.user
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+
 }
 <!-- -----------------------main body----------------------------- -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -20,24 +21,24 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
             <h1 class="account-setting-header">Account Settings</h1>
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="/Profile/Edit" enctype="multipart/form-data">
                 <div class="my-4">
                     <div class="row mt-5 align-items-center">
                         <div class="col-md-3 text-center mb-5">
                             <div class="avatar avatar-xl">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                                <img src="~/DatabaseImg/@Model.picture" alt="..." class="avatar-img rounded-circle" />
                                 <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
                                 <button class="change-picture-btn mt-4">Change Picture</button> -->
                             </div>
                             <div class="col-md-12 text-center mb-5">
-                                <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                <input type="file" class="choose-image" name="userImg" accept="image/x-png,image/gif,image/jpeg" hidden />
                                 <button class="change-picture-btn mt-4">Change Picture</button>
                             </div>
                         </div>
                         <div class="col">
                             <div class="row align-items-center">
                                 <div class="col-md-12">
-                                    <h2 class="mb-1 editname">Atiq</h2>
+                                    <h2 class="mb-1 editname">@Model.user_name</h2>
                                 </div>
                             </div>
                         </div>
@@ -48,22 +49,22 @@
                     <div class="form-row row">
                         <div class="my-form-group col-md-6">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Atiqur" value="" required />
+                            <input type="text" id="name" name="name" placeholder="full name" value="@Model.name" required />
                         </div>
                         <div class="my-form-group col-md-6">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="brown@asher.me" value="" required />
+                            <input type="email" id="email" name="mail" placeholder="mailid@xmail.com" value="@Model.mail" required />
                         </div>
                     </div>
                     <div class="my-form-group">
                         <div class="form-row row">
                             <div class="my-form-group col-md-6">
                                 <label for="phoneNo">Phone No</label>
-                                <input type="number" id="phoneNo" name="phoneNo" placeholder="0177.........." value="" />
+                                <input type="number" id="phoneNo" name="phone_no" placeholder="01XX.........." value="@Model.phone_no" />
                             </div>
                             <div class="my-form-group col-md-6">
-                                <label for="billing">Billing info</label>
-                                <input type="number" id="billing" name="billing" placeholder="0177........" value="" />
+                                <label for="billing">Billing no</label>
+                                <input type="number" id="billing" name="billing_info" placeholder="01XX........" value="@Model.billing_info" />
                             </div>
                         </div>
                     </div>
@@ -78,11 +79,11 @@
                             </div>
                             <div class="my-form-group">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" id="newPassword" name="newPass" />
+                                <input type="password" id="newPassword" name="password" />
                             </div>
                             <div class="my-form-group">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" id="conformPassword" name="confirmPass" />
+                                <input type="password" id="confirmPassword" name="confirmPass" />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -100,10 +101,31 @@
                             </ul>
                         </div>
                     </div>
-                    <input type="submit" name="submit" class="save-change-btn" />
-                    <button type="button" class="btn btn btn-outline-danger cancel-button"> <a href="dashboard.php#dashboard__overview">Cancel</a></button>
+                    <input type="submit" name="submit" class="save-change-btn" id="submitBtn" />
+                    <button type="button" class="btn btn btn-outline-danger cancel-button"> Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    var oldPass = document.getElementById("oldPassword");
+    var newPass = document.getElementById("newPassword");
+    var confirmPass = document.getElementById("confirmPassword");
+
+    var submitButton = document.getElementById("submitBtn");
+
+
+    var checkOldPass = () => {
+
+        if ("@Model.password" === oldPass.value && newPass.value === confirmPass.value)
+            submitButton.style.display = "inline-block";
+        else
+            submitButton.style.display = "none";
+    }
+
+    oldPass.addEventListener('input', checkOldPass);
+    newPass.addEventListener('input', checkOldPass);
+    confirmPass.addEventListener('input', checkOldPass);
+</script>
