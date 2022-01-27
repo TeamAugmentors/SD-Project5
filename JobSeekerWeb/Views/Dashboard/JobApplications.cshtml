@@ -1,5 +1,7 @@
-﻿
+﻿@model Object[]
 @{
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
+    var appliedUsers = (List <JobSeekerWeb.Models.freelancer>)Model[1];
     ViewBag.Title = "JobApplications";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
@@ -10,11 +12,13 @@
             Job Applications
         </h3>
         <div class="grid job-applications">
-
-        @{for (int i = 0; i < 12; i++)
-            {
-                Html.RenderPartial("JobApplicationsCard"); 
-            }}
+    
+            @{
+                foreach (var user in appliedUsers)
+                {
+                    Html.RenderPartial("JobApplicationsCard", user);
+                }
+            }
 
         </div>
     </div>

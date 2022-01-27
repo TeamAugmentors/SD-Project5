@@ -1,10 +1,35 @@
-﻿<form action="POST">
+﻿<form method="POST" id="createJobForm">
+    <select id="createJobSelect" name="category">
+        <option>Select Category --</option>
+        <option>Graphics & Design</option>
+        <option>Digital Marketing</option>
+        <option>
+            Writing & Translation
+        </option>
+        <option>
+            Video & Animation
+        </option>
+        <option>
+            Music & Audio
+        </option>
+        <option>
+            Programming & Tech
+        </option>
+        <option>
+            Business    
+        </option>
+        <option>
+            Lifestyle
+        </option>
+    </select>
 
-    <input type="text" name="title" id="title" placeholder="Job Title">
+    <input type="text" name="name" id="title" placeholder="Job Title">
     <input type="number" name="salary" id="salary" placeholder="Salary">
-    <input type="number" name="title" id="revisions" placeholder="Number of Revisions">
-    <input type="text" name="title" id="negotiable" placeholder="Negotiable">
-    <input type="text" name="title" id="skills" placeholder="Skills Required">
+    <input type="number" name="revisions" id="revisions" placeholder="Number of Revisions">
+    <input type="datetime-local" name="duration">
+    <input type="text" name="negotiable" id="negotiable" placeholder="Negotiable">
+    <input type="text" name="preferred_skills" id="skills" placeholder="Skills Required">
+    @*Details deoa lagbe, Negotiable kora lagbe*@
 
     <p>Upload Images for your Job</p>
 
@@ -25,8 +50,27 @@
         <input type="file" id="file3">
     </div>
 
-    <button type="submit">
+    <button type="button" onclick="submitForm(this)">
         Create Job
     </button>
-
 </form>
+<script>
+    let select = document.getElementById('createJobSelect')
+    select.style.color = "#c2c2c2"
+
+    select.addEventListener('change', (e) => {
+        if (e.target.value === 'Select Category --')
+            select.style.color = "#c2c2c2"
+        else
+            select.style.color = "#000000"
+    })
+
+    const submitForm = () => {
+        if (!(select.value === 'Select Category --')) {
+            console.log('SUBMITTING!')
+            document.getElementById('createJobForm').submit()
+        } else {
+            console.log('HEHEHE EROR')
+        }
+    }
+</script>

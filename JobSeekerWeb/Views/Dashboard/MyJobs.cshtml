@@ -1,9 +1,10 @@
-﻿@model Object
+﻿@model Object[]
 @{
     ViewBag.Title = "MyJobs";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 
-    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model);
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
+    var jobList = (List<JobSeekerWeb.Models.job>)Model[1];
 }
 
 <main>
@@ -14,9 +15,9 @@
         <div class="grid">
              
             @{
-                for (int i = 0; i < 12; i++)
+                foreach (JobSeekerWeb.Models.job item in jobList)
                 {
-                    Html.RenderPartial("MyJobsCard");
+                    Html.RenderPartial("MyJobsCard", item);
                 }
             }
 

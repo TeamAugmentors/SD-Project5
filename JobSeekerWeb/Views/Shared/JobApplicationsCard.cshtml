@@ -1,13 +1,14 @@
-﻿<div class="card">
+﻿@model JobSeekerWeb.Models.freelancer
+<div class="card">
     <div class="banner align-items-center">
         <img src="images/user-image.png" height="120" width="120">
     </div>
     <div class="card-body">
-        <h1>Sanjid</h1>
+        <h1>@Model.name</h1>
         <p>Rating</p>
-        <p>3 <i class="fa fa-star" aria-hidden="true"></i></p>
+        <p>@Model.rating <i class="fa fa-star" aria-hidden="true"></i></p>
         <p>Jobs Completed</p>
-        <p>5 <i class="fas fa-project-diagram"></i></p>
+        <p>@Model.completed <i class="fas fa-project-diagram"></i></p>
     </div>
     <div class="card-footer">
         <p>Java, JavaScript, C++, Illustrator</p>

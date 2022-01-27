@@ -11,31 +11,54 @@ namespace JobSeeker.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
+        jobseekerWebEntities db = new jobseekerWebEntities();
         public ActionResult Overview()
         {
-
-            //string name = Session["name"].ToString();
-            //string user_name = Session["user_name"].ToString();
-            //string mail = Session["mail"].ToString();
-            //string phone_no = Session["phone_no"].ToString();
-            //string billind_info = Session["billind_info"].ToString();
-            //string picture = Session["picture"].ToString();
-
             return View((Object)CustomSession.GetSession());
         }
 
         public ActionResult MyJobs()
         {
-            return View((Object)CustomSession.GetSession());
+            if (ModelState.IsValid)
+            {
+                int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
+                List<job> jobs = db.jobs.Where(x => id == x.id).ToList();
+                return View(new object[] { CustomSession.GetSession(), jobs });
+            }
+
+            return Redirect("Dashboard/Overview");
         }
 
-        public ActionResult JobApplications()
+        public ActionResult JobApplications(int id)
         {
-            return View((Object)CustomSession.GetSession());
-        }
+            var applications = db.applications.Where(x => x.job_id == id).ToList();
+            var appliedList = new List<freelancer>();
+            foreach (var applicationId in applications)
+            {
+                appliedList.Add(db.freelancers.Where(freelancer => freelancer.id == applicationId.applied_id).SingleOrDefault());
+            }
 
+            return View(new Object[] { (Object)CustomSession.GetSession() , (Object)appliedList}); 
+        }
+        
         public ActionResult CreateJob()
         {
+            return View((Object)CustomSession.GetSession());
+        }
+
+        [HttpPost]
+        public ActionResult CreateJob(job job)
+        {
+            if (ModelState.IsValid)
+            {
+                job.posted_by = Convert.ToInt32(CustomSession.GetSession().get("id"));
+
+                db.jobs.Add(job);
+                db.SaveChanges();
+
+                return Redirect("Dashboard/MyJobs");
+            }
+
             return View((Object)CustomSession.GetSession());
         }
     }

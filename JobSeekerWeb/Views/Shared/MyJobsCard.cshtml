@@ -1,23 +1,24 @@
-﻿<div class="card">
+﻿@model JobSeekerWeb.Models.job 
+<div class="card">
     <div class="banner">
-        <h4>Logo Design</h4>
+        <h4>@Model.name</h4>
         <div class="d-flex justify-content-center gap-3">
             <img src="images/taka-bw.svg" alt="" width="20">
-            <h5>5000</h5>
+            <h5>@Model.salary</h5>
         </div>
     </div>
     <div class="card-body">
         <p>Duration</p>
-        <p>4 Days</p>
+        <p>@DateTime.Today.Subtract(Model.duration).Days Days</p> 
         <p>Revisions</p>
-        <p>3</p>
+        <p>@Model.revisions</p>
         <p>Negotiable</p>
-        <p>Yes</p>
+        <p>@(Model.negotiable == 1 ? "Yes" : "No")</p>
     </div>
     <div class="card-footer">
-        <p>Looking for someone to do some illustrator work</p>
+        <p>@Model.details</p>
     </div>
-    <button onclick='location.href="/Dashboard/JobApplications";'>
+    <button onclick='location.href = "/Dashboard/JobApplications/@Model.id";'>
         See Applications
     </button>
 </div>

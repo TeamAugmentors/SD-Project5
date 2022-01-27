@@ -2738,11 +2738,13 @@ p {
     justify-items: center;
 }
 
+.create-job form select, 
+.create-job form input[type = "datetime-local"],
 .create-job form input[type = "text"],
 .create-job form input[type = "number"] {
     width: 100%;
     padding: 10px;
-    max-width: 450px;
+    max-width: 600px;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.8);
@@ -2759,7 +2761,7 @@ p {
     font-size: clamp(18px, 3vw, 35px);
 }
 
-.create-job form button[type="submit"] {
+.create-job form button {
     font-size: clamp(15px, 3vw, 30px);
     background-color: black;
     border-radius: 10px;
@@ -2796,6 +2798,16 @@ p {
 
 .my-jobs-main .grid.job-applications .card-body > *:nth-child(even) {
     justify-self: start;
+}
+
+
+/*CREATE form*/
+.create-job form select > * {
+    color: #000000; 
+}
+
+.create-job form select > *:first-child {
+    color: #f2f2f2;
 }
 
 
