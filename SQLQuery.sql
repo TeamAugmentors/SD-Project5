@@ -13,29 +13,45 @@ CREATE TABLE users (
 
 CREATE TABLE freelancer (
   id int NOT NULL,
+  name varchar(30) NOT NULL,
   earned varchar(30) NOT NULL DEFAULT '0',
   completed int NOT NULL DEFAULT 0,
-  rating varchar(10) NOT NULL DEFAULT 0
+  rating varchar(10) NOT NULL DEFAULT 0,
+  picture varchar (255) NULL,
 )
+
+drop table freelancer
+drop table hirer
+
 CREATE TABLE hirer (
   id int NOT NULL,
+  name varchar(30) NOT NULL,
   spent varchar(30) NOT NULL DEFAULT '0',
   hired int NOT NULL DEFAULT 0,
-  rating varchar NOT NULL DEFAULT 0
+  rating varchar NOT NULL DEFAULT 0,
+  picture varchar (255) NULL
 )
 
 CREATE TABLE job (
-  id int  PRIMARY KEY NOT NULL,
+  id int PRIMARY KEY identity(1, 1) NOT NULL,
   posted_by int NOT NULL,
   accepted_by int DEFAULT NULL,
   category varchar(30) NOT NULL,
   name varchar(30) NOT NULL,
   salary int NOT NULL,
+  revisions int NOT NULL,
   duration datetime NOT NULL,
-  details text NOT NULL,
+  details text NULL,
   negotiable int NOT NULL,
   preferred_skills varchar(30) NOT NULL
 )
+
+CREATE TABLE applications (
+
+job_id int NOT NULL, 
+applied_id int NOT NULL,
+
+DROP TABLE job
 
 INSERT INTO job (id, posted_by, accepted_by, category, name, salary, duration, details, negotiable, preferred_skills) VALUES
 (41, 25, 2, 'Graphics & Design', 'Illustration1', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
@@ -81,8 +97,21 @@ INSERT INTO job (id, posted_by, accepted_by, category, name, salary, duration, d
 
 
 SELECT * FROM users
+
+INSERT INTO users VALUES ('Tanim', 'tanim@gmail.com', '123456', 'Tanim Tanim', '12345', '12345', 'NULL', 0)
+INSERT INTO users VALUES ('Atiq', 'Atiq@gmail.com', '123456', 'Atiq Atiq', '12345', '12345', 'NULL', 0)
+
+INSERT INTO applications VALUES (1, 2)
+INSERT INTO applications VALUES (1, 3)
+
+Insert into freelancer values (2,'tanim','3500', 4, '3.4') 
+
+Insert into freelancer values (3,'atiq','5000', 3, '2.7') 
+
+Select * from applications a where (a.job_id == id)
 SELECT * FROM freelancer
 SELECT * FROM hirer
 SELECT * FROM job
+SELECT * FROM applications
 SELECT * FROM users where mail = 'a@gmail.com';
 INSERT INTO freelancer(id) values(100) 
