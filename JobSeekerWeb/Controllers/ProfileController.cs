@@ -11,7 +11,7 @@ namespace JobSeeker.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        jobseekerWebEntities db = new jobseekerWebEntities();
+        jobseekerWebEntities4 db = new jobseekerWebEntities4();
         int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
 
 

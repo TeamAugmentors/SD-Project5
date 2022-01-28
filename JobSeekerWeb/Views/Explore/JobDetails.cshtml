@@ -44,7 +44,16 @@
                 <div class="hirer-card">
                     <div class="hirer__pic-name flex">
                         <div class="hirer__pic">
-                           "~/DatabaseImg/@hirer.picture"
+                            @{
+                                if (hirer.picture == "NULL")
+                                {
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                                }
+                                else
+                                {
+                                    <img src="~/DatabaseImg/@hirer.picture" alt="..." class="avatar-img rounded-circle" />
+                                }
+                            }
                         </div>
                         <div class="hirer__name">
                             <h3>@hirer.name</h3>
