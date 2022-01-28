@@ -11,7 +11,7 @@ namespace JobSeeker.Controllers
 {
     public class UserController : Controller
     {
-        jobseekerWebEntities4 db = new jobseekerWebEntities4();
+        jobseekerWebEntities db = DatabaseConnector.getConnection();
         //jobseekerWebEntities2 db = new jobseekerWebEntities2();
         // GET: User
         [HttpPost]

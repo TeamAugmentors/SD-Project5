@@ -1,4 +1,5 @@
-﻿using JobSeekerWeb.Models;
+﻿using JobSeekerWeb.CustomUtils;
+using JobSeekerWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace JobSeeker.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        jobseekerWebEntities4 db = new jobseekerWebEntities4();
+        jobseekerWebEntities db = DatabaseConnector.getConnection();
         int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
 
 

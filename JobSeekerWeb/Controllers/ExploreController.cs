@@ -10,7 +10,7 @@ namespace JobSeeker.Controllers
 {
     public class ExploreController : Controller
     {
-        jobseekerWebEntities4 db = new jobseekerWebEntities4();
+        jobseekerWebEntities db = DatabaseConnector.getConnection();
         string query = "SELECT * FROM job";
 
         // GET: Explore

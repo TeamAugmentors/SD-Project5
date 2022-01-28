@@ -12,7 +12,7 @@ namespace JobSeeker.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        jobseekerWebEntities4 db = new jobseekerWebEntities4();
+        jobseekerWebEntities db = DatabaseConnector.getConnection();
 
         public ActionResult Overview()
         {
