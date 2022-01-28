@@ -12,14 +12,12 @@ namespace JobSeeker.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        jobseekerWebEntities db = DatabaseConnector.getConnection();
-
         public ActionResult Overview()
         {
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
-                freelancer fr = db.freelancers.Where(temp => temp.id == id).SingleOrDefault();
+                freelancer fr = DatabaseConnector.getConnection().freelancers.Where(temp => temp.id == id).SingleOrDefault();
                 return View(new object[] { CustomSession.GetSession(), fr });
             }
 
@@ -31,7 +29,7 @@ namespace JobSeeker.Controllers
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
-                List<job> jobs = db.jobs.Where(x => x.posted_by == id).ToList();
+                List<job> jobs = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by == id).ToList();
                 return View(new object[] { CustomSession.GetSession(), jobs });
             }
 
@@ -42,14 +40,14 @@ namespace JobSeeker.Controllers
         {
             if (ModelState.IsValid)
             {
-                int[] applicantsIDs = db.applications.Where(x => x.job_id == id).Select(temp => temp.applied_id).ToArray();
+                int[] applicantsIDs = DatabaseConnector.getConnection().applications.Where(x => x.job_id == id).Select(temp => temp.applied_id).ToArray();
 
                 List<ApplicantViewModel> applicantsList = new List<ApplicantViewModel>();
 
                 foreach (int applicantID in applicantsIDs)
                 {
-                    var res = (from u in db.users
-                               join f in db.freelancers on u.id equals f.id
+                    var res = (from u in DatabaseConnector.getConnection().users
+                               join f in DatabaseConnector.getConnection().freelancers on u.id equals f.id
                                where u.id == applicantID
                                select new ApplicantViewModel
                                {
@@ -85,8 +83,8 @@ namespace JobSeeker.Controllers
             {
                 job.posted_by = Convert.ToInt32(CustomSession.GetSession().get("id"));
 
-                db.jobs.Add(job);
-                db.SaveChanges();
+                DatabaseConnector.getConnection().jobs.Add(job);
+                DatabaseConnector.getConnection().SaveChanges();
 
                 return Redirect("Dashboard/MyJobs");
             }

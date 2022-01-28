@@ -12,13 +12,12 @@ namespace JobSeeker.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        jobseekerWebEntities db = DatabaseConnector.getConnection();
         int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
 
 
         public ActionResult Edit()
         {
-            user tempUser = db.users.Where(temp => temp.id == id).SingleOrDefault();
+            user tempUser = DatabaseConnector.getConnection().users.Where(temp => temp.id == id).SingleOrDefault();
 
             return View(tempUser);
         }
@@ -26,7 +25,7 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult Edit(user user, HttpPostedFileBase userImg, string confirmPass)
         {
-            user tempUser = db.users.Where(temp => temp.id == id).SingleOrDefault();
+            user tempUser = DatabaseConnector.getConnection().users.Where(temp => temp.id == id).SingleOrDefault();
             if (ModelState.IsValid)
             {
                 if (userImg != null)
@@ -49,7 +48,7 @@ namespace JobSeeker.Controllers
 
                 JobSeekerWeb.CustomUtils.CustomSession.GetSession().set("picture", tempUser.picture);
 
-                db.SaveChanges();
+                DatabaseConnector.getConnection().SaveChanges();
 
                 return Redirect("/Dashboard/Overview#dashboard__overview");
             }

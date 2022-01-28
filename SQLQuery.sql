@@ -19,8 +19,6 @@ CREATE TABLE freelancer (
   rating varchar(10) NOT NULL DEFAULT 0,
 )
 
-Insert into freelancer (id, earned, completed, rating) values (19,'5000', 3, '3.7') 
-
 
 CREATE TABLE hirer (
   id int NOT NULL,
@@ -28,6 +26,7 @@ CREATE TABLE hirer (
   hired int NOT NULL DEFAULT 0,
   rating varchar NOT NULL DEFAULT 0,
 )
+Insert into freelancer (id, earned, completed, rating) values (19,'5000', 3, '3.7') 
 
 CREATE TABLE job (
   id int PRIMARY KEY identity(1, 1) NOT NULL,
@@ -42,16 +41,19 @@ CREATE TABLE job (
   negotiable int NOT NULL,
   preferred_skills varchar(30) NOT NULL
 )
-DROP TABLE job
+
 
 CREATE TABLE applications (
 job_id int NOT NULL, 
 applied_id int NOT NULL,
 )
 
-INSERT INTO applications VALUES(3, 20),
-(3, 21)
 
+CREATE TABLE activeorder (
+  serial int IDENTITY(1, 1) PRIMARY KEY,
+  user_id int NOT NULL,
+  job_id int NOT NULL
+)
 
 INSERT INTO job (posted_by, accepted_by, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
 (1, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
@@ -95,15 +97,6 @@ INSERT INTO job (posted_by, accepted_by, category, name, salary,revisions, durat
 (1, 2, 'Lifestyle', 'Health4', 2000, '2021-12-12 02:30:01', 'prevention is better than cure', 1, 'Medic'),
 (1, 2, 'Lifestyle', 'Health5', 2000, '2021-12-12 02:30:01', 'prevention is better than cure', 1, 'Medic');
 
-CREATE TABLE activeorder (
-  serial int IDENTITY(1, 1) PRIMARY KEY,
-  user_id int NOT NULL,
-  job_id int NOT NULL
-)
-
-
-SELECT * FROM users
-
 INSERT INTO users VALUES ('Tanim', 'tanim@gmail.com', '123456', 'Tanim Tanim', '12345', '12345', 'NULL', 0)
 INSERT INTO users VALUES ('Sanjid', 'sanjid@gmail.com', '123456', 'Sanjis Islam', '12555', '12555', 'NULL', 0)
 INSERT INTO users VALUES ('Atiq', 'Atiq@gmail.com', '123456', 'Atiq Atiq', '12345', '12345', 'NULL', 0)
@@ -115,8 +108,6 @@ INSERT INTO freelancer VALUES(2, 2000, 4, 4.5),
 
 Select * from applications
 SELECT * FROM freelancer
-SELECT * FROM users u INNER JOIN freelancer f ON u.id = f.id WHERE u.id = 21
+SELECT * FROM users
 SELECT * FROM hirer
-SELECT * FROM job where posted_by = 4
-SELECT * FROM users where mail = 'a@gmail.com';
-INSERT INTO freelancer(id) values(100) 
+SELECT * FROM job

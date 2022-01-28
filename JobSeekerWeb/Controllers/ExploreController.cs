@@ -10,14 +10,13 @@ namespace JobSeeker.Controllers
 {
     public class ExploreController : Controller
     {
-        jobseekerWebEntities db = DatabaseConnector.getConnection();
         string query = "SELECT * FROM job";
 
         // GET: Explore
 
         public ActionResult Jobs()
         {
-            List<job> jobList = db.jobs.SqlQuery(query).ToList();
+            List<job> jobList = DatabaseConnector.getConnection().jobs.SqlQuery(query).ToList();
             return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
         }
 
@@ -27,11 +26,11 @@ namespace JobSeeker.Controllers
             List<job> jobList;
             if (category == "None")
             {
-                jobList = db.jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).ToList();
+                jobList = DatabaseConnector.getConnection().jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).ToList();
             }
             else
             {
-                jobList = db.jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).Where(temp => temp.category == category).ToList();
+                jobList = DatabaseConnector.getConnection().jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).Where(temp => temp.category == category).ToList();
             }
             return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
         }
@@ -41,10 +40,10 @@ namespace JobSeeker.Controllers
         {
             if(ModelState.IsValid)
             {
-                var card = db.jobs.Where(temp => temp.id == job_id).SingleOrDefault();
+                var card = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == job_id).SingleOrDefault();
                
-                HirerViewModel res = (from u in db.users
-                join hr in db.hirers on u.id equals hr.id
+                HirerViewModel res = (from u in DatabaseConnector.getConnection().users
+                join hr in DatabaseConnector.getConnection().hirers on u.id equals hr.id
                 where u.id == card.posted_by
                                select new HirerViewModel
                                {

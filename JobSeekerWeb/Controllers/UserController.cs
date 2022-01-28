@@ -11,14 +11,12 @@ namespace JobSeeker.Controllers
 {
     public class UserController : Controller
     {
-        jobseekerWebEntities db = DatabaseConnector.getConnection();
-        //jobseekerWebEntities2 db = new jobseekerWebEntities2();
         // GET: User
         [HttpPost]
         public ActionResult SignIn(user user)
         {
             string query = "SELECT * FROM users";
-            List<user> u = db.users.SqlQuery(query).ToList();
+            List<user> u = DatabaseConnector.getConnection().users.SqlQuery(query).ToList();
             foreach(var x in u)
             { 
                 if(user.mail == x.mail && user.password == x.password)
@@ -52,18 +50,18 @@ namespace JobSeeker.Controllers
             //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
             if(ModelState.IsValid)
             {
-                db.users.Add(user);
-                db.SaveChanges();
+                DatabaseConnector.getConnection().users.Add(user);
+                DatabaseConnector.getConnection().SaveChanges();
 
                 string query = $"SELECT id FROM users where mail = '{user.mail}'";
                 
-                var id = db.users.Where(temp => temp.mail == user.mail).Select(temp => temp.id).SingleOrDefault();
+                var id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.id).SingleOrDefault();
                 
                 string query1 = $"INSERT INTO freelancer(id) values({id})";
                 string query2 = $"INSERT INTO hirer(id) values({id})";
                 
-                db.Database.ExecuteSqlCommand(query1);
-                db.Database.ExecuteSqlCommand(query2);
+                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query1);
+                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query2);
 
                 Response.Redirect("SignIn");
             }
