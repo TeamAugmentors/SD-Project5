@@ -1,7 +1,16 @@
-﻿@model JobSeekerWeb.Models.freelancer
+﻿@model JobSeekerWeb.Models.ApplicantViewModel
 <div class="card">
     <div class="banner align-items-center">
-        <img src="images/user-image.png" height="120" width="120">
+        @{
+            if (Model.picture == "NULL")
+            {
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" height="120" width="120">
+            }
+            else
+            {
+                <img src="~/DatabaseImg/@Model.picture" height="120" width="120">
+            }
+        }
     </div>
     <div class="card-body">
         <h1>@Model.name</h1>

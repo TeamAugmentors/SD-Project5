@@ -1,7 +1,7 @@
 ﻿@model Object[]
 @{
     var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
-    var appliedUsers = (List <JobSeekerWeb.Models.freelancer>)Model[1];
+    var appliedUsers = (List <JobSeekerWeb.Models.ApplicantViewModel>)Model[1];
     ViewBag.Title = "JobApplications";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }

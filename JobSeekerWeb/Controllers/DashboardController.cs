@@ -5,13 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using JobSeekerWeb.Models;
 using JobSeekerWeb.CustomUtils;
+using System.Data.SqlClient;
 
 namespace JobSeeker.Controllers
 {
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        jobseekerWebEntities db = new jobseekerWebEntities();
+        jobseekerWebEntities3 db = new jobseekerWebEntities3();
+
         public ActionResult Overview()
         {
             return View((Object)CustomSession.GetSession());
@@ -22,25 +24,48 @@ namespace JobSeeker.Controllers
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
-                List<job> jobs = db.jobs.Where(x => id == x.id).ToList();
+                List<job> jobs = db.jobs.Where(x => x.posted_by == id).ToList();
                 return View(new object[] { CustomSession.GetSession(), jobs });
             }
 
             return Redirect("Dashboard/Overview");
         }
 
-        public ActionResult JobApplications(int id)
+        public ActionResult JobApplications(int? id)
         {
-            var applications = db.applications.Where(x => x.job_id == id).ToList();
-            var appliedList = new List<freelancer>();
-            foreach (var applicationId in applications)
+            if (ModelState.IsValid)
             {
-                appliedList.Add(db.freelancers.Where(freelancer => freelancer.id == applicationId.applied_id).SingleOrDefault());
-            }
+                int[] applicantsIDs = db.applications.Where(x => x.job_id == id).Select(temp => temp.applied_id).ToArray();
 
-            return View(new Object[] { (Object)CustomSession.GetSession() , (Object)appliedList}); 
+                List<ApplicantViewModel> applicantsList = new List<ApplicantViewModel>();
+
+                foreach (int applicantID in applicantsIDs)
+                {
+                    var res = (from u in db.users
+                               join f in db.freelancers on u.id equals f.id
+                               where u.id == applicantID
+                               select new ApplicantViewModel
+                               {
+                                   id = u.id,
+                                   user_name = u.user_name,
+                                   mail = u.mail,
+                                   name = u.name,
+                                   phone_no = u.phone_no,
+                                   billing_info = u.billing_info,
+                                   picture = u.picture,
+                                   earned = f.earned,
+                                   completed = f.completed,
+                                   rating = f.rating,
+
+                               }).SingleOrDefault();
+                    applicantsList.Add(res);
+                }
+
+                return View(new Object[] { (Object)CustomSession.GetSession(), (Object)applicantsList });
+            }
+            return View((Object)CustomSession.GetSession());
         }
-        
+
         public ActionResult CreateJob()
         {
             return View((Object)CustomSession.GetSession());
