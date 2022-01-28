@@ -1,10 +1,10 @@
 ﻿
-@model Object
+@model Object[]
 @{
     ViewBag.Title = "Overview";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 
-    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model);
+    var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
 
     string name = session.get("name");
     string user_name = session.get("username");
@@ -12,6 +12,12 @@
     string phone_no = session.get("phoneNo");
     string billind_info = session.get("billingInfo");
     string picture = session.get("picture");
+
+    var freelancer = ((JobSeekerWeb.Models.freelancer)Model[1]);
+    int id = freelancer.id;
+    int completedJobs = freelancer.completed;
+    string earnAmount = freelancer.earned;
+    string rating = freelancer.rating;
 }
 <main>
     <div class="dashboard-main custom--container flex">
@@ -19,7 +25,7 @@
         <div class="dashboard__profile">
             <div class="profile__pic flex">
                 @{
-                    
+
                     if (picture != null && picture != "")
                     {
                         <img src="~/DatabaseImg/@picture" alt="profile picture">
@@ -39,19 +45,19 @@
             <div class="profile__job-info flex">
                 <div class="job-info earned">
                     <h2>Earned</h2>
-                    <h3>4900</h3>
+                    <h3>@earnAmount</h3>
                     <h4>TAKA</h4>
                 </div>
                 <div class="info-divider"></div>
                 <div class="job-info completed">
                     <h2>Completed</h2>
-                    <h3>10</h3>
+                    <h3>@completedJobs</h3>
                     <h4>JOBS</h4>
                 </div>
                 <div class="info-divider"></div>
                 <div class="job-info rated">
                     <h2>Rated</h2>
-                    <h3>4.9</h3>
+                    <h3>@rating</h3>
                     <h4>STARS</h4>
                 </div>
             </div>
@@ -218,9 +224,9 @@
                                                 <i class='bx bxs-right-arrow'></i>
                                             </div>
                                             <div class="accordion-content">
-                                                <h4>lorem name</h4>
-                                                <h4>lorem email</h4>
-                                                <h4>lorem phone no</h4>
+                                                <h4>@name</h4>
+                                                <h4>@mail</h4>
+                                                <h4>@phone_no</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +241,7 @@
                                                 <i class='bx bxs-right-arrow'></i>
                                             </div>
                                             <div class="accordion-content">
-                                                <h4>lorem billing</h4>
+                                                <h4>@billind_info</h4>
                                             </div>
                                         </div>
                                     </div>

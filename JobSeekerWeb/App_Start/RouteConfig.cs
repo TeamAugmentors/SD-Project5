@@ -14,11 +14,6 @@ namespace JobSeekerWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapMvcAttributeRoutes();
 
-
-            //route for product details page
-            routes.MapRoute("JobDetails", "Explore/Explore{job_id}",
-                new { controller = "Explore", action = "JobDetails" });
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

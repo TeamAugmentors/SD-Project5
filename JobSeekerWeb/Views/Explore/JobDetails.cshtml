@@ -1,26 +1,29 @@
-﻿@model JobSeekerWeb.Models.job
+﻿@model Object[]
 @{
     ViewBag.Title = "JobDetails";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+
+    var job = (JobSeekerWeb.Models.job)Model[0];
+    var hirer = (JobSeekerWeb.Models.HirerViewModel)Model[1];
 }
 
 <main>
     <div class="product-details">
-        <h1 class="special--container">@Model.category</h1>
+        <h1 class="special--container">@job.category</h1>
         <section class="product__title-section special--container flex">
-            <h2>@Model.name.</h2>
+            <h2>@job.name.</h2>
             <div class="taka flex">
                 <div class="taka-logo flex">
                     <img src="~/images/taka-bw.svg" alt="taka">
                 </div>
-                <div class="taka-amount">@Model.salary</div>
+                <div class="taka-amount">@job.salary</div>
             </div>
         </section>
         <section class="job-info-section flex">
             <div class="job-info__details special--container">
                 <div class="job-details flex">
                     <h3>Deadline</h3>
-                    <h3>@Model.duration</h3>
+                    <h3>@job.duration</h3>
                 </div>
                 <div class="job-details flex">
                     <h3>Revisions</h3>
@@ -29,7 +32,7 @@
                 <div class="job-details flex">
                     <h3>Negotiable</h3>
                     <h3>
-                       @( Model.negotiable == 1 ? "yes" : "no" )
+                       @( job.negotiable == 1 ? "yes" : "no" )
                     </h3>
                 </div>
                 <!-- <div class="job-details flex">
@@ -41,29 +44,29 @@
                 <div class="hirer-card">
                     <div class="hirer__pic-name flex">
                         <div class="hirer__pic">
-                            hirer picture
+                           "~/DatabaseImg/@hirer.picture"
                         </div>
                         <div class="hirer__name">
-                            <h3>hirer name </h3>
+                            <h3>@hirer.name</h3>
                             <h4>Hirer</h4>
                         </div>
                     </div>
                     <div class="hirer__info flex">
                         <div class="job-info earned">
                             <h2>Spent</h2>
-                            <h3>hirer spent</h3>
+                            <h3>@hirer.spent</h3>
                             <h4>TAKA</h4>
                         </div>
                         <div class="info-divider"></div>
                         <div class="job-info completed">
                             <h2>Hired</h2>
-                            <h3>hirer hired</h3>
+                            <h3>@hirer.hired</h3>
                             <h4>Freelancers</h4>
                         </div>
                         <div class="info-divider"></div>
                         <div class="job-info rated">
                             <h2>Rated</h2>
-                            <h3>hirer rating</h3>
+                            <h3>@hirer.rating</h3>
                             <h4>STARS</h4>
                         </div>
                     </div>
@@ -72,7 +75,7 @@
         </section>
         <section class="description-section special--container">
             <h2>Description</h2>
-            <p>@Model.details</p>
+            <p>@job.details</p>
         </section>
         <section class="sample-files-section">
             <div class="special--container">

@@ -24,11 +24,9 @@ Insert into freelancer (id, earned, completed, rating) values (19,'5000', 3, '3.
 
 CREATE TABLE hirer (
   id int NOT NULL,
-  name varchar(30) NOT NULL,
   spent varchar(30) NOT NULL DEFAULT '0',
   hired int NOT NULL DEFAULT 0,
   rating varchar NOT NULL DEFAULT 0,
-  picture varchar (255) NULL
 )
 
 CREATE TABLE job (
@@ -44,6 +42,7 @@ CREATE TABLE job (
   negotiable int NOT NULL,
   preferred_skills varchar(30) NOT NULL
 )
+DROP TABLE job
 
 CREATE TABLE applications (
 job_id int NOT NULL, 
@@ -55,8 +54,8 @@ INSERT INTO applications VALUES(3, 20),
 
 
 INSERT INTO job (posted_by, accepted_by, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
-(19, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
-(25, NULL, 'Graphics & Design', 'Illustration1', 3000, 4, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
+(1, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
+(1, NULL, 'Graphics & Design', 'Illustration1', 3000, 4, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (1, 2, 'Graphics & Design', 'Illustration3', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (1, NULL, 'Graphics & Design', 'Illustration4', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (1, NULL, 'Graphics & Design', 'Illustration5', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
@@ -109,10 +108,10 @@ INSERT INTO users VALUES ('Tanim', 'tanim@gmail.com', '123456', 'Tanim Tanim', '
 INSERT INTO users VALUES ('Sanjid', 'sanjid@gmail.com', '123456', 'Sanjis Islam', '12555', '12555', 'NULL', 0)
 INSERT INTO users VALUES ('Atiq', 'Atiq@gmail.com', '123456', 'Atiq Atiq', '12345', '12345', 'NULL', 0)
 
-INSERT INTO applications VALUES (4, 2)
-INSERT INTO applications VALUES (4, 3)
-INSERT INTO freelancer VALUES(20, 2000, 4, 4.5),
-(21, 20000, 10, 4.0)
+INSERT INTO applications VALUES (1, 2)
+INSERT INTO applications VALUES (1, 3)
+INSERT INTO freelancer VALUES(2, 2000, 4, 4.5),
+(3, 20000, 10, 4.0)
 
 Select * from applications
 SELECT * FROM freelancer

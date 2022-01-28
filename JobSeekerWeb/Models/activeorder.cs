@@ -12,18 +12,10 @@ namespace JobSeekerWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class job
+    public partial class activeorder
     {
-        public int id { get; set; }
-        public int posted_by { get; set; }
-        public Nullable<int> accepted_by { get; set; }
-        public string category { get; set; }
-        public string name { get; set; }
-        public int salary { get; set; }
-        public int revisions { get; set; }
-        public System.DateTime duration { get; set; }
-        public string details { get; set; }
-        public int negotiable { get; set; }
-        public string preferred_skills { get; set; }
+        public int serial { get; set; }
+        public int user_id { get; set; }
+        public int job_id { get; set; }
     }
 }

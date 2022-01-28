@@ -34,10 +34,9 @@
         <div class="description">
             <p>@Model.details</p>
         </div>
-        <form action="/Explore/JobDetails" method="GET">
-            <input type="hidden" class="card-button" value=@Model.id name="job_id" />
-            <button class="card-button">See More</button>
-        </form>
+
+        <button type="button" class="card-button" onclick='location.href = "/Explore/JobDetails/@Model.id";'>See More</button>
+
         <!--<div class="card-button">Applied!</div> -->
     </div>
 </div>

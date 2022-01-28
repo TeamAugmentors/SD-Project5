@@ -12,11 +12,18 @@ namespace JobSeeker.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        jobseekerWebEntities3 db = new jobseekerWebEntities3();
+        jobseekerWebEntities db = new jobseekerWebEntities();
 
         public ActionResult Overview()
         {
-            return View((Object)CustomSession.GetSession());
+            if (ModelState.IsValid)
+            {
+                int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
+                freelancer fr = db.freelancers.Where(temp => temp.id == id).SingleOrDefault();
+                return View(new object[] { CustomSession.GetSession(), fr });
+            }
+
+            return View((Object)CustomSession.GetSession());        
         }
 
         public ActionResult MyJobs()

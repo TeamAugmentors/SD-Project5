@@ -36,11 +36,35 @@ namespace JobSeeker.Controllers
             return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
         }
 
-    public ActionResult JobDetails(int? job_id)
+    [Route("Explore/JobDetails/{job_id}")]
+    public ActionResult JobDetails(int job_id)
         {
-            var card = db.jobs.Where(temp => temp.id == job_id).SingleOrDefault();
+            if(ModelState.IsValid)
+            {
+                var card = db.jobs.Where(temp => temp.id == job_id).SingleOrDefault();
+               
+                HirerViewModel res = (from u in db.users
+                join hr in db.hirers on u.id equals hr.id
+                where u.id == card.posted_by
+                               select new HirerViewModel
+                               {
+                                   id = u.id,
+                                   user_name = u.user_name,
+                                   mail = u.mail,
+                                   name = u.name,
+                                   phone_no = u.phone_no,
+                                   billing_info = u.billing_info,
+                                   picture = u.picture,
+                                   spent = hr.spent,
+                                   hired = hr.hired,
+                                   rating = hr.rating,
 
-            return View(card);
+                               }).SingleOrDefault();
+
+                return View(new object[] { card, res });
+            }
+            
+            return View();
         }
     }
 }
