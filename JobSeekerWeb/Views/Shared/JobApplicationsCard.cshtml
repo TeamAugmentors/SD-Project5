@@ -22,8 +22,11 @@
     <div class="card-footer">
         <p>Java, JavaScript, C++, Illustrator</p>
     </div>
-    <button>
-        Hire
-    </button>
+    <form method="POST" action="/Dashboard/HireUser">
+        <input name="applicantId" value=@Model.id class="d-none"/>
+        <button type="submit">
+            Hire
+        </button>
+    </form>
 </div>
 

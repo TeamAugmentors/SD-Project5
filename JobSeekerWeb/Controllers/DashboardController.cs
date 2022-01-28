@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using JobSeekerWeb.Models;
 using JobSeekerWeb.CustomUtils;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace JobSeeker.Controllers
 {
@@ -29,17 +30,18 @@ namespace JobSeeker.Controllers
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
-                List<job> jobs = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by == id).ToList();
+                List<job> jobs = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by == id).Where( x => x.hired_id == null).ToList();
                 return View(new object[] { CustomSession.GetSession(), jobs });
             }
 
-            return Redirect("Dashboard/Overview");
+            return Redirect("Overview");
         }
-
+        static int? currentJobId;
         public ActionResult JobApplications(int? id)
         {
             if (ModelState.IsValid)
             {
+                currentJobId = id;
                 int[] applicantsIDs = DatabaseConnector.getConnection().applications.Where(x => x.job_id == id).Select(temp => temp.applied_id).ToArray();
 
                 List<ApplicantViewModel> applicantsList = new List<ApplicantViewModel>();
@@ -68,28 +70,99 @@ namespace JobSeeker.Controllers
 
                 return View(new Object[] { (Object)CustomSession.GetSession(), (Object)applicantsList });
             }
-            return View((Object)CustomSession.GetSession());
+            return Redirect("Overview");
         }
 
+        [HttpPost]
+        public ActionResult HireUser(int? applicantId)
+        {
+            if (ModelState.IsValid)
+            {
+                var instance = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == currentJobId).SingleOrDefault();
+                instance.hired_id = applicantId;
+                DatabaseConnector.getConnection().SaveChanges();
+
+                return Redirect("MyJobs");
+            }
+
+            return Redirect("Overview");
+        }
         public ActionResult CreateJob()
         {
             return View((Object)CustomSession.GetSession());
         }
 
         [HttpPost]
-        public ActionResult CreateJob(job job)
+        public ActionResult CreateJob(job job, HttpPostedFileBase[] jobImages, HttpPostedFileBase[] jobFiles)
         {
             if (ModelState.IsValid)
             {
                 job.posted_by = Convert.ToInt32(CustomSession.GetSession().get("id"));
 
                 DatabaseConnector.getConnection().jobs.Add(job);
+
                 DatabaseConnector.getConnection().SaveChanges();
 
-                return Redirect("Dashboard/MyJobs");
+                foreach (var item in jobImages)
+                {
+                    if (item == null)
+                        continue;
+
+                    var extension = Path.GetExtension(item.FileName);
+
+                    var result = (DatabaseConnector.getConnection().jobimages).OrderByDescending(x => x.serial).Select(x => x.serial).FirstOrDefault();
+                    var renamedFile = $"{++result}{Path.GetExtension(item.FileName)}";
+
+                    var directorytosave = Server.MapPath(Url.Content("~/jobimages"));
+                    var pathtosave = Path.Combine(directorytosave, renamedFile);
+                    item.SaveAs(pathtosave);
+
+                    //db
+
+                    var jobId = (DatabaseConnector.getConnection().jobs).OrderByDescending(x => x.id).Select(x => x.id).FirstOrDefault();
+
+                    DatabaseConnector.getConnection().jobimages.Add(new jobimage
+                    {
+                        job_id = jobId,
+                        sample_images = renamedFile
+                    });
+
+                    DatabaseConnector.getConnection().SaveChanges();
+                }
+
+                foreach (var item in jobFiles)
+                {
+                    if (item == null)
+                        continue;
+
+                    var extension = Path.GetExtension(item.FileName);
+
+                    var result = (DatabaseConnector.getConnection().jobfiles).OrderByDescending(x => x.serial).Select(x => x.serial).FirstOrDefault();
+                    var renamedFile = $"{++result}{Path.GetExtension(item.FileName)}";
+
+                    var directorytosave = Server.MapPath(Url.Content("~/jobfiles"));
+                    var pathtosave = Path.Combine(directorytosave, renamedFile);
+                    item.SaveAs(pathtosave);
+
+                    //db
+
+                    var jobId = (DatabaseConnector.getConnection().jobs).OrderByDescending(x => x.id).Select(x => x.id).FirstOrDefault();
+
+                    DatabaseConnector.getConnection().jobfiles.Add(new jobfile
+                    {
+                        job_id = jobId,
+                        sample_files = renamedFile
+                    });
+
+                    DatabaseConnector.getConnection().SaveChanges();
+                }
+
+                return Redirect("MyJobs");
             }
 
             return View((Object)CustomSession.GetSession());
         }
+
     }
+
 }

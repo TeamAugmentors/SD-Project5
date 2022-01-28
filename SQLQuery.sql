@@ -31,7 +31,7 @@ Insert into freelancer (id, earned, completed, rating) values (19,'5000', 3, '3.
 CREATE TABLE job (
   id int PRIMARY KEY identity(1, 1) NOT NULL,
   posted_by int NOT NULL,
-  accepted_by int DEFAULT NULL,
+  hired_id int DEFAULT NULL,
   category varchar(30) NOT NULL,
   name varchar(30) NOT NULL,
   salary int NOT NULL,
@@ -54,6 +54,22 @@ CREATE TABLE activeorder (
   user_id int NOT NULL,
   job_id int NOT NULL
 )
+
+CREATE TABLE jobfiles (
+serial int IDENTITY(1, 1) PRIMARY KEY,
+job_id int NOT NULL,
+sample_files varchar(255) NOT NULL
+)
+
+
+
+CREATE TABLE jobimages (
+serial int IDENTITY(1, 1) PRIMARY KEY,
+job_id int NOT NULL,
+sample_images varchar(255) NOT NULL
+)
+
+Select Top 1 * from jobimages ORDER BY serial DESC
 
 INSERT INTO job (posted_by, accepted_by, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
 (1, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
@@ -103,11 +119,23 @@ INSERT INTO users VALUES ('Atiq', 'Atiq@gmail.com', '123456', 'Atiq Atiq', '1234
 
 INSERT INTO applications VALUES (1, 2)
 INSERT INTO applications VALUES (1, 3)
-INSERT INTO freelancer VALUES(2, 2000, 4, 4.5),
+INSERT INTO applications VALUES (2, 3)
+INSERT INTO freelancer VALUES (1, 1000, 5, 5),(2, 2000, 4, 4.5),
 (3, 20000, 10, 4.0)
+
+insert into hirer values (1, 6000, 4, 2)
 
 Select * from applications
 SELECT * FROM freelancer
 SELECT * FROM users
 SELECT * FROM hirer
 SELECT * FROM job
+SELECT * FROM jobfiles
+SELECT * FROM jobimages
+
+
+drop table hirer
+drop table freelancer
+drop table job
+drop table jobfiles
+drop table jobimages

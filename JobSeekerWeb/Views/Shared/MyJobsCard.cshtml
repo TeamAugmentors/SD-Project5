@@ -3,13 +3,13 @@
     <div class="banner">
         <h4>@Model.name</h4>
         <div class="d-flex justify-content-center gap-3">
-            <img src="images/taka-bw.svg" alt="" width="20">
+            <img src="~/images/taka-bw.svg" alt="" width="20">
             <h5>@Model.salary</h5>
         </div>
     </div>
     <div class="card-body">
         <p>Duration</p>
-        <p>@DateTime.Today.Subtract(Model.duration).Days Days</p> 
+        <p>@Model.duration.Subtract(DateTime.Today).Days Days</p> 
         <p>Revisions</p>
         <p>@Model.revisions</p>
         <p>Negotiable</p>

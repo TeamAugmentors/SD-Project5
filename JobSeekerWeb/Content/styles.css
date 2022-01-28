@@ -2810,6 +2810,9 @@ p {
     color: #f2f2f2;
 }
 
+.job-applications form button {
+    width: 100%;
+}
 
 @media (max-width: 750px) {
     .profile-container .editname {
