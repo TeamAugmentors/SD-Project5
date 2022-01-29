@@ -60,7 +60,10 @@ namespace JobSeeker.Controllers
 
                                }).SingleOrDefault();
 
-                return View(new object[] { card, res });
+                List<string> files = DatabaseConnector.getConnection().jobfiles.Where(temp => temp.job_id == card.id).Select(temp => temp.sample_files).ToList();
+                List<string> images = DatabaseConnector.getConnection().jobimages.Where(temp => temp.job_id == card.id).Select(temp => temp.sample_images).ToList();
+
+                return View(new object[] { card, res, files, images });
             }
             
             return View();

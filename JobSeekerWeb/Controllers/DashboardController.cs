@@ -140,7 +140,7 @@ namespace JobSeeker.Controllers
                     var result = (DatabaseConnector.getConnection().jobfiles).OrderByDescending(x => x.serial).Select(x => x.serial).FirstOrDefault();
                     var renamedFile = $"{++result}{Path.GetExtension(item.FileName)}";
 
-                    var directorytosave = Server.MapPath(Url.Content("~/jobfiles"));
+                    var directorytosave = Server.MapPath(Url.Content("~/JobFiles"));
                     var pathtosave = Path.Combine(directorytosave, renamedFile);
                     item.SaveAs(pathtosave);
 
