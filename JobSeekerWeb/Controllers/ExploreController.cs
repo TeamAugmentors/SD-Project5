@@ -13,15 +13,12 @@ namespace JobSeeker.Controllers
         //string query = "SELECT * FROM job ";
 
         // GET: Explore
-
+        static int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
+        int[] jobIds = DatabaseConnector.getConnection().applications.Where(a => a.applied_id == id).Select(a => a.job_id).ToArray();
         public ActionResult Jobs()
         {
             if(ModelState.IsValid)
             {
-                int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
-
-                int[] jobIds = DatabaseConnector.getConnection().applications.Where(a => a.applied_id == id).Select(a => a.job_id).ToArray();
-
                 List<job> jobList = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by != id).ToList();
                 
                 return View(new Object[] { CustomSession.GetSession(), jobList, jobIds});
@@ -32,16 +29,23 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult Jobs(int? tk_min, int? tk_max, string category = "None")
         {
-            List<job> jobList;
-            if (category == "None")
+            if(ModelState.IsValid)
             {
-                jobList = DatabaseConnector.getConnection().jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).ToList();
+                ViewBag.tk_min = tk_min;    
+                ViewBag.tk_max = tk_max;    
+
+                List<job> jobList;
+                if (category == "None")
+                {
+                    jobList = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by != id).Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).ToList();
+                }
+                else
+                {
+                    jobList = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by != id).Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).Where(temp => temp.category == category).ToList();
+                }
+                return View(new Object[] { CustomSession.GetSession(), jobList, jobIds });
             }
-            else
-            {
-                jobList = DatabaseConnector.getConnection().jobs.Where(temp => temp.salary >= tk_min).Where(temp => temp.salary <= tk_max).Where(temp => temp.category == category).ToList();
-            }
-            return View(new Object[] { (Object)CustomSession.GetSession(), (Object)jobList });
+            return Redirect("Explore/Jobs");
         }
 
         [Route("Explore/JobDetails/{job_id}")]

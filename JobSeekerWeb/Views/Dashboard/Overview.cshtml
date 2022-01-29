@@ -19,8 +19,8 @@
     string earnAmount = freelancer.earned;
     string rating = freelancer.rating;
 
-    List<JobSeekerWeb.Models.MyJobsViewModel> orders = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[2];
-    List<JobSeekerWeb.Models.MyJobsViewModel> applications = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[3];
+    List<JobSeekerWeb.Models.MyJobsViewModel> jobInfo = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[2];
+    List<JobSeekerWeb.Models.MyJobsViewModel> appliedJobInfo = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[3];
 }
 <main>
     <div class="dashboard-main custom--container flex">
@@ -138,19 +138,24 @@
                                 </div>
                                 <div class="accordion-content">
                                     <!-- nested accordion -->
-                                    <div>
-                                        <div class="overview-nested-content__bg">
-                                            <input type="checkbox" name="status-nested-accordion" id="order1" class="accordion__input">
-                                            <div class="overview-label flex">
-                                                <label for="order1" class="accordion__label flex">lorem ipsum name</label>
-                                                <i class='bx bxs-right-arrow'></i>
+                                    @{
+                                        foreach (var job in jobInfo)
+                                        {
+                                            //Html.RenderPartial("MyJobs", job);
+                                            <div>
+                                                <div class="overview-nested-content__bg">
+                                                    <input type="checkbox" name="status-nested-accordion" id="order" + @job.Id class="accordion__input">
+                                                    <div class="overview-label flex">
+                                                        <label for="order" + @job.Id class="accordion__label flex">@job.name</label>
+                                                        <i class='bx bxs-right-arrow'></i>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        @job.details
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="accordion-content">
-                                                lorem ipsum details
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -162,10 +167,22 @@
                                     <i class='bx bxs-right-arrow'></i>
                                 </div>
                                 <div class="accordion-content">
-                                    @{ 
-                                        foreach(JobSeekerWeb.Models.MyJobsViewModel job in applications)
+                                    @{
+                                        foreach (var job in appliedJobInfo)
                                         {
-                                            Html.RenderPartial("MyJobs", job);
+                                            //Html.RenderPartial("MyJobs", job);
+                                            <div>
+                                                <div class="overview-nested-content__bg">
+                                                    <input type="checkbox" name="status-nested-accordion" id="applied" + @job.Id class="accordion__input">
+                                                    <div class="overview-label flex">
+                                                        <label for="applied" + @job.Id class="accordion__label flex">@job.name</label>
+                                                        <i class='bx bxs-right-arrow'></i>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        @job.details
+                                                    </div>
+                                                </div>
+                                            </div>
                                         }
                                     }
                                 </div>

@@ -133,6 +133,8 @@ SELECT * FROM job
 SELECT * FROM jobfiles
 SELECT * FROM jobimages
 
+
+--Drop tables
 drop table hirer
 drop table freelancer
 drop table job

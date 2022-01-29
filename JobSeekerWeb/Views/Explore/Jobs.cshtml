@@ -14,6 +14,9 @@
     string phone_no = session.get("phoneNo");
     string billind_info = session.get("billingInfo");
     string picture = session.get("picture");
+
+    var tk_min = ViewBag.tk_min;
+    var tk_max = ViewBag.tk_max;
 }
 
 <div class="explore-container">
@@ -57,9 +60,9 @@
                         </div>
                         <div class="content">
                             <div class="input-amount">
-                                <input type="number" min="0" max="50000" class="input-tk-min" name="tk_min">
+                                <input type="number" min="0" max="50000" class="input-tk-min" name="tk_min" value=@(tk_min == null? 0 : tk_min)>
                                 <span>to</span>
-                                <input type="number" min="0" max="50000" class="input-tk-max" name="tk_max">
+                                <input type="number" min="0" max="50000" class="input-tk-max" name="tk_max" value=@(tk_max == null? 50000 : tk_max)>
                             </div>
                             <div class="slider-container">
                                 <div class="tk-min">500</div>
@@ -142,11 +145,10 @@
                     @{
                         foreach (var card in jobList)
                         {
-                            if(jobIds.Contains(card.id))
+                            if(!jobIds.Contains(card.id))
                             {
-                                continue;
+                                Html.RenderPartial("JobBoardCard", card);
                             }
-                            Html.RenderPartial("JobBoardCard", card);
                         }
                     }
                 </div>
