@@ -1,0 +1,14 @@
+﻿@model JobSeekerWeb.Models.MyJobsViewModel
+
+<div>
+    <div class="overview-nested-content__bg">
+        <input type="checkbox" name="status-nested-accordion" id="applied" + @Model.Id class="accordion__input">
+        <div class="overview-label flex">
+            <label for="applied" + @Model.Id class="accordion__label flex">@Model.name</label>
+            <i class='bx bxs-right-arrow'></i>
+        </div>
+        <div class="accordion-content">
+            @Model.details
+        </div>
+    </div>
+</div>
