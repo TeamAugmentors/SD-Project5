@@ -30,7 +30,7 @@ namespace JobSeeker.Controllers
             {
                 if (userImg != null)
                 {
-                    var fileName = Path.GetFileName(userImg.FileName);
+                    var fileName = $"{CustomSession.GetSession().get("id")}{Path.GetExtension(userImg.FileName)}";
                     var directoryToSave = Server.MapPath(Url.Content("~/DatabaseImg"));
 
                     var pathToSave = Path.Combine(directoryToSave, fileName);

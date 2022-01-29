@@ -42,7 +42,6 @@ CREATE TABLE job (
   preferred_skills varchar(30) NOT NULL
 )
 
-
 CREATE TABLE applications (
 job_id int NOT NULL, 
 applied_id int NOT NULL,
