@@ -16,7 +16,7 @@ namespace JobSeekerWeb.Models
     {
         public int id { get; set; }
         public int posted_by { get; set; }
-        public Nullable<int> accepted_by { get; set; }
+        public Nullable<int> hired_id { get; set; }
         public string category { get; set; }
         public string name { get; set; }
         public int salary { get; set; }
