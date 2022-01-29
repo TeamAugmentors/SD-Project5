@@ -15,7 +15,7 @@
             <div class="duration">
                 <div class="details-left">Duration</div>
                 <div class="details-right">
-                    @DateTime.Today.Subtract(Model.duration).Days Days
+                    @Model.duration.Subtract(DateTime.Today).Days Days
                 </div>
             </div>
             <div class="revisions">

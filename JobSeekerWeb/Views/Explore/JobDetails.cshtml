@@ -7,6 +7,9 @@
     var hirer = (JobSeekerWeb.Models.HirerViewModel)Model[1];
     List<string> samepleFiles = (List<string>)Model[2];
     List<string> samepleImages = (List<string>)Model[3];
+
+    int id = Convert.ToInt32(JobSeekerWeb.CustomUtils.CustomSession.GetSession().get("id"));
+    
 }
 
 <main>
@@ -111,10 +114,10 @@
                             @{
                                 foreach (string file in samepleFiles)
                                 {
-                                    <button class="download-file-btn flex" onclick="download($'~/JobFiles/@file')">
+                                    <a class="download-file-btn flex" href="~/JobFiles/@file" target="_blank" style="color: inherit; text-decoration: none">
                                         <span>File</span>
                                         <i class="fas fa-download"></i>
-                                    </button>
+                                    </a>
                                 }
 
                             }
@@ -132,8 +135,9 @@
                 <h2>Hurry Up!</h2>
                 <p>Only few applications left for this job!</p>
                 <p>If you have what it takes, what are you waiting for?</p>
-                <form action="" method="POST">
-                    <input type="hidden" value="1" name="apply" />
+                <form action="/Explore/Apply" method="POST">
+                    <input type="hidden" value=@job.id name="job_id" />
+                    <input type="hidden" value=@id name="applied_id" />
                     <button>Apply now</button>
                 </form>
                 <h3>By clicking the apply button, I agree to all the terms and conditions</h3>
@@ -141,16 +145,4 @@
         </section>
     </div>
 </main>
-
-<script>
-    function download(url) {
-        const a = document.createElement('a')
-        a.href = url
-        a.download = url.split('/').pop()
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-    }
-
-</script>
 

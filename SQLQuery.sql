@@ -70,10 +70,10 @@ sample_images varchar(255) NOT NULL
 
 Select Top 1 * from jobimages ORDER BY serial DESC
 
-INSERT INTO job (posted_by, accepted_by, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
-(1, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
-(1, NULL, 'Graphics & Design', 'Illustration1', 3000, 4, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
-(1, 2, 'Graphics & Design', 'Illustration3', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
+INSERT INTO job (posted_by, hired_id, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
+(19, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2022-02-12 02:30:01', 'illustration is very nice', 1, 'Design'),
+(20, NULL, 'Programming', 'C++', 3000, 4, '2022-02-20 02:30:01', 'Programming is very nice', 1, 'Design'),
+(21, NULL, 'Game Development', 'Unity', 3000, 3,'2022-01-31 02:30:01', 'Unity is very nice', 1, 'Design'),
 (1, NULL, 'Graphics & Design', 'Illustration4', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (1, NULL, 'Graphics & Design', 'Illustration5', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (25, NULL, 'Writing & Translation', 'Translate1', 4000, '2021-12-12 02:30:01', 'translation is very nice', 1, 'Multilingual'),
@@ -122,7 +122,7 @@ INSERT INTO applications VALUES (2, 3)
 INSERT INTO freelancer VALUES (1, 1000, 5, 5),(2, 2000, 4, 4.5),
 (3, 20000, 10, 4.0)
 
-insert into hirer values (1, 6000, 4, 2)
+insert into hirer values (19, 0, 0, 0), (20, 30000, 4, 4.5), (21, 20000, 9, 4.3)
 
 Select * from applications
 SELECT * FROM freelancer
@@ -132,9 +132,9 @@ SELECT * FROM job
 SELECT * FROM jobfiles
 SELECT * FROM jobimages
 
-
 drop table hirer
 drop table freelancer
 drop table job
 drop table jobfiles
 drop table jobimages
+SELECT * FROM job where 

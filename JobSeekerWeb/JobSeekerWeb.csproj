@@ -158,7 +158,6 @@
     <Compile Include="Models\job.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\JobAssetsViewModel.cs" />
     <Compile Include="Models\jobfile.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

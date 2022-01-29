@@ -6,6 +6,7 @@
 
     var session = ((JobSeekerWeb.CustomUtils.SessionObject)Model[0]);
     var jobList = (List<JobSeekerWeb.Models.job>)Model[1];
+    var jobIds = (int[])Model[2];
 
     string name = session.get("name");
     string user_name = session.get("username");
@@ -141,6 +142,10 @@
                     @{
                         foreach (var card in jobList)
                         {
+                            if(jobIds.Contains(card.id))
+                            {
+                                continue;
+                            }
                             Html.RenderPartial("JobBoardCard", card);
                         }
                     }
