@@ -10,7 +10,7 @@ namespace JobSeeker.Controllers
 {
     public class ExploreController : Controller
     {
-        string query = "SELECT * FROM job ";
+        //string query = "SELECT * FROM job ";
 
         // GET: Explore
 

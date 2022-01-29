@@ -24,7 +24,7 @@ CREATE TABLE hirer (
   id int NOT NULL,
   spent varchar(30) NOT NULL DEFAULT '0',
   hired int NOT NULL DEFAULT 0,
-  rating varchar NOT NULL DEFAULT 0,
+  rating varchar(10) NOT NULL DEFAULT 0,
 )
 Insert into freelancer (id, earned, completed, rating) values (19,'5000', 3, '3.7') 
 
@@ -71,9 +71,9 @@ sample_images varchar(255) NOT NULL
 Select Top 1 * from jobimages ORDER BY serial DESC
 
 INSERT INTO job (posted_by, hired_id, category, name, salary,revisions, duration, details, negotiable, preferred_skills) VALUES
-(19, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2022-02-12 02:30:01', 'illustration is very nice', 1, 'Design'),
-(20, NULL, 'Programming', 'C++', 3000, 4, '2022-02-20 02:30:01', 'Programming is very nice', 1, 'Design'),
-(21, NULL, 'Game Development', 'Unity', 3000, 3,'2022-01-31 02:30:01', 'Unity is very nice', 1, 'Design'),
+(2, NULL, 'Graphics & Design', 'Illustration2', 3000, 3, '2022-02-12 02:30:01', 'illustration is very nice', 1, 'Design'),
+(3, NULL, 'Programming', 'C++', 3000, 4, '2022-02-20 02:30:01', 'Programming is very nice', 1, 'Design'),
+(2, NULL, 'Game Development', 'Unity', 3000, 3,'2022-01-31 02:30:01', 'Unity is very nice', 1, 'Design')
 (1, NULL, 'Graphics & Design', 'Illustration4', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (1, NULL, 'Graphics & Design', 'Illustration5', 3000, '2021-12-12 02:30:01', 'illustration is very nice', 1, 'Design'),
 (25, NULL, 'Writing & Translation', 'Translate1', 4000, '2021-12-12 02:30:01', 'translation is very nice', 1, 'Multilingual'),
@@ -122,8 +122,9 @@ INSERT INTO applications VALUES (2, 3)
 INSERT INTO freelancer VALUES (1, 1000, 5, 5),(2, 2000, 4, 4.5),
 (3, 20000, 10, 4.0)
 
-insert into hirer values (19, 0, 0, 0), (20, 30000, 4, 4.5), (21, 20000, 9, 4.3)
+insert into hirer values (1, 10000, 4, 5), (2, 30000, 4, 4.5), (3, 20000, 9, 4.3)
 
+Select * from activeorder
 Select * from applications
 SELECT * FROM freelancer
 SELECT * FROM users
@@ -137,4 +138,4 @@ drop table freelancer
 drop table job
 drop table jobfiles
 drop table jobimages
-SELECT * FROM job where 
+SELECT * FROM job 

@@ -18,6 +18,9 @@
     int completedJobs = freelancer.completed;
     string earnAmount = freelancer.earned;
     string rating = freelancer.rating;
+
+    List<JobSeekerWeb.Models.MyJobsViewModel> orders = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[2];
+    List<JobSeekerWeb.Models.MyJobsViewModel> applications = (List<JobSeekerWeb.Models.MyJobsViewModel>)Model[3];
 }
 <main>
     <div class="dashboard-main custom--container flex">
@@ -128,7 +131,7 @@
                     <div class="overview-content">
                         <div>
                             <div class="overview-content__bg">
-                                <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" "checked" />
+                                <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input checked" />
                                 <div class="overview-label flex">
                                     <label for="active-orders" class="accordion__label flex">Active Orders</label>
                                     <i class='bx bxs-right-arrow'></i>
@@ -147,6 +150,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -158,22 +162,12 @@
                                     <i class='bx bxs-right-arrow'></i>
                                 </div>
                                 <div class="accordion-content">
-                                    <!-- nested accordion -->
-
-                                    <div>
-                                        <div class="overview-nested-content__bg">
-                                            <input type="checkbox" name="status-nested-accordion" id="applied1" class="accordion__input">
-                                            <div class="overview-label flex">
-                                                <label for="applied1" class="accordion__label flex">lorem ipsum name</label>
-                                                <i class='bx bxs-right-arrow'></i>
-                                            </div>
-                                            <div class="accordion-content">
-                                                lorem ipsum details
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                                    @{ 
+                                        foreach(JobSeekerWeb.Models.MyJobsViewModel job in applications)
+                                        {
+                                            Html.RenderPartial("MyJobs", job);
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>

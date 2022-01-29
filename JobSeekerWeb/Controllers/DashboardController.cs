@@ -19,7 +19,25 @@ namespace JobSeeker.Controllers
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
                 freelancer fr = DatabaseConnector.getConnection().freelancers.Where(temp => temp.id == id).SingleOrDefault();
-                return View(new object[] { CustomSession.GetSession(), fr });
+                List<activeorder> activeOrders = DatabaseConnector.getConnection().activeorders.Where(temp => temp.user_id == id).ToList();
+                List<application> applications = DatabaseConnector.getConnection().applications.Where(temp => temp.applied_id == id).ToList();
+
+                List<MyJobsViewModel> jobInfo = new List<MyJobsViewModel>();
+                List<MyJobsViewModel> appliedJobInfo = new List<MyJobsViewModel>();
+
+                foreach (activeorder order in activeOrders)
+                {
+                    var x = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == order.job_id).Select( temp => new MyJobsViewModel { Id = temp.id, name = temp.name, details = temp.details }).SingleOrDefault();
+                    jobInfo.Add(x);
+                }
+
+                foreach (application apply in applications)
+                {
+                    var x = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == apply.job_id).Select(temp => new MyJobsViewModel { Id = temp.id, name = temp.name, details = temp.details }).SingleOrDefault();
+                    appliedJobInfo.Add(x);
+                }
+
+                return View(new object[] { CustomSession.GetSession(), fr, jobInfo, appliedJobInfo });
             }
 
             return View((Object)CustomSession.GetSession());        
