@@ -2814,6 +2814,53 @@ p {
     width: 100%;
 }
 
+.chip-group {
+    display: flex;
+    font-size: clamp(18px, 3vw, 40px);
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+    padding-left: 10px;
+    max-width: 600px;
+}
+
+.chip-group > *:first-child {
+    margin-left: auto;
+}
+
+.chip {
+    border: none;
+    border-radius: 100px !important;
+    font-size: clamp(10px, 3vw, 20px) !important;
+    padding: 3px 15px !important;
+    transition: all 0.2s
+}
+
+.chip:hover {
+    box-shadow: 0 4px 2px 0 rgb(0 0 0 / 15%);
+    transform: translateY(-3px);
+}
+
+.chip[chip-selected = true] {
+    background-color: black !important;
+    color: white !important;
+}
+
+.chip[chip-selected = false] {
+    background-color: transparent !important;
+    color: black !important;
+    -webkit-box-shadow: inset 0px 0px 0px 2px black;
+}
+
+#createJobForm textarea {
+    resize: none;
+    height: 400px;
+    font-size: clamp(12px, 3vw, 24px);
+    padding: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
 @media (max-width: 750px) {
     .profile-container .editname {
         text-align: center;

@@ -16,7 +16,7 @@
             Programming & Tech
         </option>
         <option>
-            Business    
+            Business
         </option>
         <option>
             Lifestyle
@@ -27,9 +27,10 @@
     <input type="number" name="salary" id="salary" placeholder="Salary">
     <input type="number" name="revisions" id="revisions" placeholder="Number of Revisions">
     <input type="datetime-local" name="duration">
-    <input type="text" name="negotiable" id="negotiable" placeholder="Negotiable">
+
+    <div class="chip-group">Negotiable? <button class="chip" chip-selected=true type="button">Yes</button> <button class="chip" chip-selected=false type="button">No</button></div>
     <input type="text" name="preferred_skills" id="skills" placeholder="Skills Required">
-    @*Details deoa lagbe, Negotiable kora lagbe*@
+    <textarea placeholder="Enter details about your job here" id="textarea"></textarea>
 
     <p>Upload Images for your Job</p>
 
@@ -42,8 +43,9 @@
     </div>
 
     <p>Upload Files for your Job</p>
+
     <div class="file-upload">
-        <input type="file" id="file1" name="jobFiles"> 
+        <input type="file" id="file1" name="jobFiles">
 
         <input type="file" id="file2" name="jobFiles">
 
@@ -54,23 +56,3 @@
         Create Job
     </button>
 </form>
-<script>
-    let select = document.getElementById('createJobSelect')
-    select.style.color = "#c2c2c2"
-
-    select.addEventListener('change', (e) => {
-        if (e.target.value === 'Select Category --')
-            select.style.color = "#c2c2c2"
-        else
-            select.style.color = "#000000"
-    })
-
-    const submitForm = () => {
-        if (!(select.value === 'Select Category --')) {
-            console.log('SUBMITTING!')
-            document.getElementById('createJobForm').submit()
-        } else {
-            console.log('HEHEHE EROR')
-        }
-    }
-</script>

@@ -194,6 +194,7 @@
     <Content Include="Content\contact_us.css" />
     <Content Include="Content\fullpage.min.css" />
     <Content Include="Content\home_style.css" />
+    <Content Include="Scripts\create-form.js" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
