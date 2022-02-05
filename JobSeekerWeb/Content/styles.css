@@ -2861,6 +2861,74 @@ p {
     max-width: 600px;
 }
 
+/*MODAL*/
+.custom-modal-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: #00000045;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+.modal-form-wrapper {
+    width: 85%;
+}
+.custom-modal-dialog {
+    position: relative;
+    border-radius: 10px;
+    background: white;
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custom-model-header > h1 {
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
+}
+.custom-modal-form {
+    display: flex;
+    flex-direction: column;
+}
+.custom-modal-form-group > input {
+    outline: none;
+    display: block;
+    width: 100%;
+    height: 6rem;
+    padding: 0.5rem 2rem;
+    font-size: 2.5rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: rgb(236, 243, 254);
+    border: none;
+    border-radius: 0.5rem;
+}
+.custom-modal-form > button{
+    margin-top: 10px;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: var(--darker_green);
+    padding: 0.45em 1.6em;
+    border-radius: 7px;
+}
+.custom-modal-cross {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+.custom-modal-cross > i {
+    font-size: 2rem;
+}
+
+/*MODAL*/
 @media (max-width: 750px) {
     .profile-container .editname {
         text-align: center;

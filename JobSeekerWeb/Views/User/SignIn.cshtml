@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "SignIn";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+    bool otp = ViewBag.otp == null ? false : ViewBag.otp;
+    //bool otp = true;
 }
 
 <!-- -----------------Toast------------------------- -->
@@ -73,13 +75,20 @@
                     <input type="email" class="custom-input" name="mail" id="email" aria-describedby="emailHelp" placeholder="ani.atikur99@gmail.com" required>
                     <div class="line"></div>
                 </div>
-                <div class="custom-form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" class="custom-input" id="password" name="password" aria-describedby="passwordHelp" required>
-                    <div class="line"></div>
-                </div>
+
+                <!-- Modal -->
+
+
                 <button type="submit" class="form-custom-button">Sign in</button>
             </form>
+            @{
+                if (otp)
+
+                {
+                    Html.RenderPartial("ModalView");
+
+                }
+            }
         </div>
     </div>
 </div>

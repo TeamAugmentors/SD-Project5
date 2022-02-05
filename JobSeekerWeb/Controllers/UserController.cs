@@ -19,7 +19,7 @@ namespace JobSeeker.Controllers
             List<user> u = DatabaseConnector.getConnection().users.SqlQuery(query).ToList();
             foreach(var x in u)
             { 
-                if(user.mail == x.mail && user.password == x.password)
+                if(user.mail == x.mail)
                 {
 
                     //Session["id"] = x.id;
@@ -33,13 +33,26 @@ namespace JobSeeker.Controllers
                     CustomSession.GetSession().set(new String[]{ "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture"} ,
                         new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture });
 
-                   
-                    Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                    ViewBag.otp = true;
+                    break;
+                    //Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                }
+                if (ViewBag.otp == null)
+                {
+                    HttpContext.Server.ClearError();
+                    // Response.Headers.Clear();
+                    HttpContext.Response.Redirect("/User/SignUp", false);
                 }
             }
             return View();
         }
-        public ActionResult SignIn()
+
+        [HttpPost]
+        public ActionResult otpVerification(int otp)
+        {
+            return View();
+        }
+            public ActionResult SignIn()
         {
             return View();
         }
