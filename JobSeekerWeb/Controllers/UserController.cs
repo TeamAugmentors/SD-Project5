@@ -21,17 +21,8 @@ namespace JobSeeker.Controllers
             {
                 if (user.mail == x.mail && user.password == x.password)
                 {
-
-                    //Session["id"] = x.id;
-                    //Session["name"] = x.name;
-                    //Session["mail"] = x.mail;
-                    //Session["user_name"] = x.user_name;
-                    //Session["phone_no"] = x.phone_no;
-                    //Session["billind_info"] = x.billing_info;
-                    //Session["picture"] = x.picture;
-
-                    CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture" },
-                        new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture });
+                    CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
+                        new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture, null });
 
                     //ViewBag.otp = true;
                     //break;
@@ -63,12 +54,21 @@ namespace JobSeeker.Controllers
             //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
             if (ModelState.IsValid)
             {
-                DatabaseConnector.getConnection().users.Add(user);
-                DatabaseConnector.getConnection().SaveChanges();
+                string email = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.mail).SingleOrDefault();   
 
-                makeInstances(user.mail);
+                if(email == null)
+                {
+                    DatabaseConnector.getConnection().users.Add(user);
+                    DatabaseConnector.getConnection().SaveChanges();
 
-                Response.Redirect("SignIn");
+                    makeInstances(user.mail);
+
+                    Response.Redirect("SignIn");
+                }
+                else
+                {
+                    return View();
+                }
             }
             return View();
         }
@@ -86,6 +86,7 @@ namespace JobSeeker.Controllers
                     //u.picture = picture;
                     u.token = token;
                     DatabaseConnector.getConnection().SaveChanges();
+
                     CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
                       new Object[] { u.id, u.name, u.mail, u.user_name, u.phone_no, u.billing_info, u.picture, u.token });
                 }
@@ -105,10 +106,13 @@ namespace JobSeeker.Controllers
 
                     string query = $"INSERT INTO users(user_name, mail, name, picture, token) values('{newUser.user_name}', '{newUser.mail}', '{newUser.name}', '{newUser.picture}', '{newUser.token}')";
                     DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query);
+
                     makeInstances(newUser.mail);
 
+                    int id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == email).Select(temp => temp.id).FirstOrDefault();
+
                     CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
-                      new Object[] { newUser.id, newUser.name, newUser.mail, newUser.user_name, newUser.phone_no, newUser.billing_info, newUser.picture, newUser.token });
+                      new Object[] { id, newUser.name, newUser.mail, newUser.user_name, newUser.phone_no, newUser.billing_info, newUser.picture, newUser.token });
                 }
 
                 Response.Redirect("/Dashboard/Overview#dashboard__overview");
@@ -129,7 +133,7 @@ namespace JobSeeker.Controllers
             {
                 string query = $"SELECT id FROM users where mail = '{mail}'";
 
-                var id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == mail).Select(temp => temp.id).SingleOrDefault();
+                int id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == mail).Select(temp => temp.id).SingleOrDefault();
 
                 string query1 = $"INSERT INTO freelancer(id) values({id})";
                 string query2 = $"INSERT INTO hirer(id) values({id})";

@@ -27,21 +27,21 @@
                         <div class="col-md-3 text-center mb-5">
                             <div class="avatar avatar-xl">
                                 @{
-                                    if (Model.picture.Equals(null) || Model.picture.Length == 0)
+                                    if (Model.picture == null)
                                     {
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture1" class="avatar-img rounded-circle">
                                     }
-                                    else if(!Model.picture.Equals(null) && Model.picture.Length > 0)
+                                    else if (!Model.picture.Contains("http://"))
                                     {
-                                        <img src="~/DatabaseImg/@Model.picture" alt="profile picture">
+                                        <img src="~/DatabaseImg/@Model.picture" alt="profile picture2" class="avatar-img rounded-circle">
                                     }
-                                    else if (!Model.token.Equals(null))
+                                    else if (Model.picture.Contains("http://"))
                                     {
-                                        <img src = @Model.picture alt = "profile picture" >
+                                        <img src=@Model.picture alt="profile picture3" class="avatar-img rounded-circle">
                                     }
                                 }
                                 <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
-                                <button class="change-picture-btn mt-4">Change Picture</button> -->
+    <button class="change-picture-btn mt-4">Change Picture</button> -->
                             </div>
                             <div class="col-md-12 text-center mb-5">
                                 <input type="file" class="choose-image" name="userImg" accept="image/x-png,image/gif,image/jpeg" hidden />
@@ -83,7 +83,7 @@
                     </div>
                     <!-- ------------------------------Password------------------------------- -->
                     @{
-                        if (Model.token.Equals(null))
+                        if (Model.token == null)
                         {
                             <h2 class="d-flex justify-content-start info-section mt-5">Password</h2>
                             <div class="edit-profile-horizontal-line mb-1"></div>

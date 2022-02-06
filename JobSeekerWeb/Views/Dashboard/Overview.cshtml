@@ -29,17 +29,17 @@
         <div class="dashboard__profile">
             <div class="profile__pic flex">
                 @{
-                    if (picture.Equals(null) || picture.Length == 0)
+                    if (picture == null)
                     {
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture1">
                     }
-                    else if (picture.Equals(null) && picture.Length > 0)
+                    else if (!picture.Contains("https://"))
                     {
-                        <img src="~/DatabaseImg/@picture" alt="profile picture">
+                        <img src="~/DatabaseImg/@picture" alt="profile picture2">
                     }
-                    else if (token.Equals(null))
+                    else if (picture.Contains("https://"))
                     {
-                        <img src=@picture alt="profile picture">
+                        <img src=@picture alt="profile picture3">
                     }
 
                 }
