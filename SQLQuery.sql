@@ -3,12 +3,13 @@ CREATE TABLE users (
   id int identity(1, 1) primary key,
   user_name varchar(30) NOT NULL,
   mail varchar(30) NOT NULL,
-  password varchar(30) NOT NULL,
+  password varchar(30) NULL,
   name varchar(30) NOT NULL,
   phone_no varchar(11) NULL,
   billing_info varchar(11) NULL,
   picture varchar(200) NULL,
-  ban int NOT NULL DEFAULT 0
+  ban int NOT NULL DEFAULT 0,
+  token varchar(2000) NULL,
 )
 
 
@@ -112,9 +113,9 @@ INSERT INTO job (posted_by, hired_id, category, name, salary,revisions, duration
 (1, 2, 'Lifestyle', 'Health4', 2000, '2021-12-12 02:30:01', 'prevention is better than cure', 1, 'Medic'),
 (1, 2, 'Lifestyle', 'Health5', 2000, '2021-12-12 02:30:01', 'prevention is better than cure', 1, 'Medic');
 
-INSERT INTO users VALUES ('Tanim', 'tanim@gmail.com', '123456', 'Tanim Tanim', '12345', '12345', 'NULL', 0)
-INSERT INTO users VALUES ('Sanjid', 'sanjid@gmail.com', '123456', 'Sanjis Islam', '12555', '12555', 'NULL', 0)
-INSERT INTO users VALUES ('Atiq', 'Atiq@gmail.com', '123456', 'Atiq Atiq', '12345', '12345', 'NULL', 0)
+INSERT INTO users VALUES ('Tanim', 'tanim@gmail.com', '123456', 'Tanim Tanim', '12345', '12345', 'NULL', 0, NULL)
+INSERT INTO users VALUES ('Sanjid', 'sanjid@gmail.com', '123456', 'Sanjis Islam', '12555', '12555', 'NULL', 0, NULL)
+INSERT INTO users VALUES ('Atiq', 'atik@mail.com', '123456', 'Atiq Atiq', '12345', '12345', 'NULL', 0, NULL)
 
 INSERT INTO applications VALUES (1, 2)
 INSERT INTO applications VALUES (1, 3)
@@ -135,6 +136,7 @@ SELECT * FROM jobimages
 
 
 --Drop tables
+drop table users
 drop table hirer
 drop table freelancer
 drop table job

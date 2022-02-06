@@ -12,8 +12,9 @@
     string phone_no = session.get("phoneNo");
     string billind_info = session.get("billingInfo");
     string picture = session.get("picture");
+    string token = session.get("token");
 
-    var freelancer = ((JobSeekerWeb.Models.freelancer)Model[1]);
+    var freelancer = (JobSeekerWeb.Models.freelancer)Model[1];
     int id = freelancer.id;
     int completedJobs = freelancer.completed;
     string earnAmount = freelancer.earned;
@@ -28,15 +29,19 @@
         <div class="dashboard__profile">
             <div class="profile__pic flex">
                 @{
-
-                    if (picture != null && picture != "")
-                    {
-                        <img src="~/DatabaseImg/@picture" alt="profile picture">
-                    }
-                    else
+                    if (picture.Equals(null) || picture.Length == 0)
                     {
                         <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture">
                     }
+                    else if (picture.Equals(null) && picture.Length > 0)
+                    {
+                        <img src="~/DatabaseImg/@picture" alt="profile picture">
+                    }
+                    else if (token.Equals(null))
+                    {
+                        <img src=@picture alt="profile picture">
+                    }
+
                 }
             </div>
             <div class="profile__name">

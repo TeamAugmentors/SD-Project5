@@ -43,9 +43,10 @@ namespace JobSeeker.Controllers
                 tempUser.phone_no = user.phone_no;
                 tempUser.billing_info = user.billing_info;
 
-
-                tempUser.password = user.password ?? tempUser.password;
-
+                if(CustomSession.GetSession().get("token").Equals(null))
+                {
+                    tempUser.password = user.password ?? tempUser.password;
+                }
                 JobSeekerWeb.CustomUtils.CustomSession.GetSession().set("picture", tempUser.picture);
 
                 DatabaseConnector.getConnection().SaveChanges();
