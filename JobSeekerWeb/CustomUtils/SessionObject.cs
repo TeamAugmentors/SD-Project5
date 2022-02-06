@@ -11,7 +11,7 @@ namespace JobSeekerWeb.CustomUtils
 
         public void set(string key, object value)
         {   
-            String strValue = value.ToString();
+            String strValue = value == null ? null : value.ToString();
             Map[key] = strValue;   
         }
 
@@ -20,7 +20,7 @@ namespace JobSeekerWeb.CustomUtils
            for (int i = 0; i < keys.Length; i++)
             {
                 String key = keys[i];
-                String value = "";
+                String value = null;
                 if (values[i] != null)
                 {
                     value = values[i].ToString();
