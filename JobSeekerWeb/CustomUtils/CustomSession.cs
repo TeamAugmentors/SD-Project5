@@ -13,6 +13,7 @@ namespace JobSeekerWeb.CustomUtils
         public static SessionObject GetSession()
         {
             return session; 
+            //testSS
         }
     }
 }
