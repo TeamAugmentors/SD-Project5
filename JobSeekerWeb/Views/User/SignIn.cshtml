@@ -1,34 +1,9 @@
 ﻿@{
     ViewBag.Title = "SignIn";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
+    bool otp = ViewBag.otp == null ? false : ViewBag.otp;
+    //bool otp = true;
 }
-
-<!-- -----------------Toast------------------------- -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <!-- <img src="..." class="rounded me-2" alt="..."> -->
-            <h4 class="me-auto mb-0">Login Failed</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            <h3>Please enter correctly</h3>
-        </div>
-    </div>
-</div>
-
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToastBan" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <!-- <img src="..." class="rounded me-2" alt="..."> -->
-            <h4 class="me-auto mb-0">You have been banned</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            <h3>Contact our support for <br> more information</h3>
-        </div>
-    </div>
-</div>
 
 <div class="signin-page">
     <div class="left">
@@ -60,10 +35,13 @@
             <div class="signin-header">
                 <h1>Sign in to Job Seeker</h1>
             </div>
-            <button class="signin-with-google-button">
+
+            <button class="signin-with-google-button" id="customBtn">
                 <i class="google-icon fab fa-google"></i>
                 Sign in with Google
             </button>
+            @*<div class="g-signin2" data-onsuccess="onSignIn"></div>*@
+
             <div class="or-with-line">
                 <p>Or</p>
             </div>
@@ -82,4 +60,68 @@
             </form>
         </div>
     </div>
+
+    <form method="POST" id="gooleForm" action="/User/addDatabase" style="display: none">
+
+        <input type="text" id="name" name="name" aria-describedby="nameHelp">
+
+        <input type="text" id="username" name="user_name" aria-describedby="usernameHelp">
+
+        <input type="email" id="email_inp" name="email" aria-describedby="emailHelp">
+
+        <input type="url" id="picture" name="picture" aria-describedby="pictureHelp">
+
+        <input type="text" id="token" name="token" aria-describedby="pictureHelp">
+
+    </form>
+
 </div>
+<script src="https://apis.google.com/js/api:client.js"></script>
+<script>
+
+    var googleUser = {};
+    var startApp = function () {
+        gapi.load('auth2', function () {
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+                client_id: '1689376102-9t5bd78u3v47ieq463km4e8kl7dqu064.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                scope: 'email'
+            });
+            attachSignin(document.getElementById('customBtn'));
+        });
+    };
+
+    function attachSignin(element) {
+        console.log(element.id);
+        auth2.attachClickHandler(element, {},
+            function (googleUser) {
+                const profile = googleUser.getBasicProfile();
+
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+
+
+                var id_token = googleUser.getAuthResponse().id_token;
+                //console.log("ID Token: " + id_token);
+                const inputs = document.querySelector('#gooleForm').children;
+                inputs[0].value = profile.getName();
+                inputs[1].value = profile.getFamilyName();
+                inputs[2].value = profile.getEmail();
+                inputs[3].value = profile.getImageUrl();
+                inputs[4].value = id_token;
+
+                document.querySelector('#gooleForm').submit();
+
+            }, function (error) {
+                alert(JSON.stringify(error, undefined, 2));
+            });
+    }
+
+</script>
+<script>startApp();</script>

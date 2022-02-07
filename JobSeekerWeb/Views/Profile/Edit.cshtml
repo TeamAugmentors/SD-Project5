@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
-    
+
 }
 <!-- -----------------------main body----------------------------- -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -29,11 +29,15 @@
                                 @{
                                     if (Model.picture == null)
                                     {
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture1" class="avatar-img rounded-circle">
                                     }
-                                    else
+                                    else if (!Model.picture.Contains("http://"))
                                     {
-                                        <img src="~/DatabaseImg/@Model.picture" alt="..." class="avatar-img rounded-circle" />
+                                        <img src="~/DatabaseImg/@Model.picture" alt="profile picture2" class="avatar-img rounded-circle">
+                                    }
+                                    else if (Model.picture.Contains("http://"))
+                                    {
+                                        <img src=@Model.picture alt="profile picture3" class="avatar-img rounded-circle">
                                     }
                                 }
                                 <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
@@ -78,38 +82,43 @@
                         </div>
                     </div>
                     <!-- ------------------------------Password------------------------------- -->
-                    <h2 class="d-flex justify-content-start info-section mt-5">Password</h2>
-                    <div class="edit-profile-horizontal-line mb-1"></div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="my-form-group">
-                                <label for="oldPassword">Old Password</label>
-                                <input type="password" id="oldPassword" name="oldPass" required />
+                    @{
+                        if (Model.token == null)
+                        {
+                            <h2 class="d-flex justify-content-start info-section mt-5">Password</h2>
+                            <div class="edit-profile-horizontal-line mb-1"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="my-form-group">
+                                        <label for="oldPassword">Old Password</label>
+                                        <input type="password" id="oldPassword" name="oldPass" required />
+                                    </div>
+                                    <div class="my-form-group">
+                                        <label for="newPassword">New Password</label>
+                                        <input type="password" id="newPassword" name="password" />
+                                    </div>
+                                    <div class="my-form-group">
+                                        <label for="confirmPassword">Confirm Password</label>
+                                        <input type="password" id="confirmPassword" name="confirmPass" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2">Password requirements</p>
+                                    <p class="small text-muted mb-2">
+                                        To create a new password, you have to meet all of
+                                        the
+                                        following requirements:
+                                    </p>
+                                    <ul class="small text-muted pl-4 mb-0">
+                                        <li>Minimum 8 character</li>
+                                        <li>At least one special character</li>
+                                        <li>At least one number</li>
+                                        <li>Can’t be the same as a previous password</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="my-form-group">
-                                <label for="newPassword">New Password</label>
-                                <input type="password" id="newPassword" name="password" />
-                            </div>
-                            <div class="my-form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" id="confirmPassword" name="confirmPass" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="mb-2">Password requirements</p>
-                            <p class="small text-muted mb-2">
-                                To create a new password, you have to meet all of
-                                the
-                                following requirements:
-                            </p>
-                            <ul class="small text-muted pl-4 mb-0">
-                                <li>Minimum 8 character</li>
-                                <li>At least one special character</li>
-                                <li>At least one number</li>
-                                <li>Can’t be the same as a previous password</li>
-                            </ul>
-                        </div>
-                    </div>
+                        }
+                    }
                     <input type="submit" name="submit" class="save-change-btn" id="submitBtn" />
                     <button type="button" class="btn btn btn-outline-danger cancel-button"> Cancel</button>
                 </div>
@@ -125,16 +134,21 @@
 
     var submitButton = document.getElementById("submitBtn");
 
+    document.querySelector('.cancel-button').addEventListener('click', () => {
+        history.back();
+    });
 
-    var checkOldPass = () => {
+    if (oldPass !== null) {
+        var checkOldPass = () => {
 
-        if ("@Model.password" === oldPass.value && newPass.value === confirmPass.value)
-            submitButton.style.display = "inline-block";
-        else
-            submitButton.style.display = "none";
+            if ("@Model.password" === oldPass.value && newPass.value === confirmPass.value)
+                submitButton.style.display = "inline-block";
+            else
+                submitButton.style.display = "none";
+        }
+
+        oldPass.addEventListener('input', checkOldPass);
+        newPass.addEventListener('input', checkOldPass);
+        confirmPass.addEventListener('input', checkOldPass);
     }
-
-    oldPass.addEventListener('input', checkOldPass);
-    newPass.addEventListener('input', checkOldPass);
-    confirmPass.addEventListener('input', checkOldPass);
 </script>

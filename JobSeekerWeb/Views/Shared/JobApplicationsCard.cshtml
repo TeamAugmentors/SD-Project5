@@ -2,13 +2,17 @@
 <div class="card">
     <div class="banner align-items-center">
         @{
-            if (Model.picture == "NULL")
+            if (Model.picture == null)
             {
                 <img src="https://bootdey.com/img/Content/avatar/avatar6.png" height="120" width="120">
             }
-            else
+            else if (!Model.picture.Contains("https://"))
             {
                 <img src="~/DatabaseImg/@Model.picture" height="120" width="120">
+            }
+            else if (Model.picture.Contains("https://"))
+            {
+                <img src = @Model.picture height = "120" width = "120">
             }
         }
     </div>

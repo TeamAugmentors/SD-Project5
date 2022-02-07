@@ -18,7 +18,6 @@ namespace JobSeeker.Controllers
         public ActionResult Edit()
         {
             user tempUser = DatabaseConnector.getConnection().users.Where(temp => temp.id == id).SingleOrDefault();
-
             return View(tempUser);
         }
 
@@ -43,12 +42,16 @@ namespace JobSeeker.Controllers
                 tempUser.phone_no = user.phone_no;
                 tempUser.billing_info = user.billing_info;
 
-
-                tempUser.password = user.password ?? tempUser.password;
-
+                if (CustomSession.GetSession().get("token") == null)
+                {
+                    tempUser.password = user.password ?? tempUser.password;
+                }
                 JobSeekerWeb.CustomUtils.CustomSession.GetSession().set("picture", tempUser.picture);
 
                 DatabaseConnector.getConnection().SaveChanges();
+
+                CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
+                      new Object[] { tempUser.id, tempUser.name, tempUser.mail, tempUser.user_name, tempUser.phone_no, tempUser.billing_info, tempUser.picture, tempUser.token });
 
                 return Redirect("/Dashboard/Overview#dashboard__overview");
             }

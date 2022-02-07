@@ -1,0 +1,23 @@
+﻿<div class="custom-modal-wrapper">
+    <div class="custom-modal-dialog">
+        <div class="custom-modal-cross">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="modal-form-wrapper">
+            <div class="custom-model-header">
+                <h1>Enter OTP</h1>
+            </div>
+            <form method="POST" class="custom-modal-form" action="/User/otpVerification">
+                <div class="custom-modal-form-group">
+                    <input type="number" class="custom-modal-input" name="otp" id="otp" aria-describedby="otpHelp" placeholder="Enter otp here" required>
+                </div>
+                <button type="submit" class="form-custom-modal-button">Submit</button>
+            </form>
+        </div>
+</div>
+
+<script>
+    document.querySelector(".custom-modal-cross").addEventListener('click', () => {
+        document.querySelector(".custom-modal-wrapper").style.display = "none";
+    });
+</script>

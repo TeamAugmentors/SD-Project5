@@ -17,26 +17,30 @@ namespace JobSeeker.Controllers
         {
             string query = "SELECT * FROM users";
             List<user> u = DatabaseConnector.getConnection().users.SqlQuery(query).ToList();
-            foreach(var x in u)
-            { 
-                if(user.mail == x.mail && user.password == x.password)
+            foreach (var x in u)
+            {
+                if (user.mail == x.mail && user.password == x.password)
                 {
+                    CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
+                        new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture, null });
 
-                    //Session["id"] = x.id;
-                    //Session["name"] = x.name;
-                    //Session["mail"] = x.mail;
-                    //Session["user_name"] = x.user_name;
-                    //Session["phone_no"] = x.phone_no;
-                    //Session["billind_info"] = x.billing_info;
-                    //Session["picture"] = x.picture;
-
-                    CustomSession.GetSession().set(new String[]{ "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture"} ,
-                        new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture });
-
-                   
+                    //ViewBag.otp = true;
+                    //break;
                     Response.Redirect("/Dashboard/Overview#dashboard__overview");
                 }
+                //if (ViewBag.otp == null)
+                //{
+                //    HttpContext.Server.ClearError();
+                //    // Response.Headers.Clear();
+                //    HttpContext.Response.Redirect("/User/SignUp", false);
+                //}
             }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult otpVerification(int otp)
+        {
             return View();
         }
         public ActionResult SignIn()
@@ -48,29 +52,96 @@ namespace JobSeeker.Controllers
         public ActionResult SignUp(user user)
         {
             //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                DatabaseConnector.getConnection().users.Add(user);
-                DatabaseConnector.getConnection().SaveChanges();
+                string email = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.mail).SingleOrDefault();   
 
-                string query = $"SELECT id FROM users where mail = '{user.mail}'";
-                
-                var id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.id).SingleOrDefault();
-                
-                string query1 = $"INSERT INTO freelancer(id) values({id})";
-                string query2 = $"INSERT INTO hirer(id) values({id})";
-                
-                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query1);
-                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query2);
+                if(email == null)
+                {
+                    DatabaseConnector.getConnection().users.Add(user);
+                    DatabaseConnector.getConnection().SaveChanges();
 
-                Response.Redirect("SignIn");
+                    makeInstances(user.mail);
+
+                    Response.Redirect("SignIn");
+                }
+                else
+                {
+                    return View();
+                }
             }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult addDatabase(string name, string user_name, string email, string picture, string token)
+        {
+            if (ModelState.IsValid)
+            {
+                user u = DatabaseConnector.getConnection().users.Where(x => x.mail == email).SingleOrDefault();
+                if (u != null)
+                {
+                    //u.name = name;
+                    //u.user_name = user_name;
+                    //u.picture = picture;
+                    u.token = token;
+                    DatabaseConnector.getConnection().SaveChanges();
+
+                    CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
+                      new Object[] { u.id, u.name, u.mail, u.user_name, u.phone_no, u.billing_info, u.picture, u.token });
+                }
+                else
+                {
+                    user newUser = new user();
+
+                    newUser.user_name = user_name;
+                    newUser.mail = email;
+                    newUser.password = null;
+                    newUser.name = name;
+                    newUser.phone_no = null;
+                    newUser.billing_info = null;
+                    newUser.picture = picture;
+                    newUser.ban = 0;
+                    newUser.token = token;
+
+                    string query = $"INSERT INTO users(user_name, mail, name, picture, token) values('{newUser.user_name}', '{newUser.mail}', '{newUser.name}', '{newUser.picture}', '{newUser.token}')";
+                    DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query);
+
+                    makeInstances(newUser.mail);
+
+                    int id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == email).Select(temp => temp.id).FirstOrDefault();
+
+                    CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
+                      new Object[] { id, newUser.name, newUser.mail, newUser.user_name, newUser.phone_no, newUser.billing_info, newUser.picture, newUser.token });
+                }
+
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+            }
+
+            return View();
+        }
+
         public ActionResult SignUp()
         {
 
             return View();
+        }
+
+        public void makeInstances(string mail)
+        {
+            if (ModelState.IsValid && mail != null)
+            {
+                string query = $"SELECT id FROM users where mail = '{mail}'";
+
+                int id = DatabaseConnector.getConnection().users.Where(temp => temp.mail == mail).Select(temp => temp.id).SingleOrDefault();
+
+                string query1 = $"INSERT INTO freelancer(id) values({id})";
+                string query2 = $"INSERT INTO hirer(id) values({id})";
+
+                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query1);
+                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query2);
+            }
+
         }
 
     }
