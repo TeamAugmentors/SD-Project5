@@ -17,6 +17,11 @@ namespace JobSeeker.Controllers
 
         public ActionResult Edit()
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             user tempUser = DatabaseConnector.getConnection().users.Where(temp => temp.id == id).SingleOrDefault();
             return View(tempUser);
         }
@@ -24,6 +29,11 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult Edit(user user, HttpPostedFileBase userImg, string confirmPass)
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             user tempUser = DatabaseConnector.getConnection().users.Where(temp => temp.id == id).SingleOrDefault();
             if (ModelState.IsValid)
             {

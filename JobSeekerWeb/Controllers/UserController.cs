@@ -15,6 +15,11 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult SignIn(user user)
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             string query = "SELECT * FROM users";
             List<user> u = DatabaseConnector.getConnection().users.SqlQuery(query).ToList();
             foreach (var x in u)
@@ -45,12 +50,22 @@ namespace JobSeeker.Controllers
         }
         public ActionResult SignIn()
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult SignUp(user user)
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
             if (ModelState.IsValid)
             {
@@ -123,7 +138,11 @@ namespace JobSeeker.Controllers
 
         public ActionResult SignUp()
         {
-
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             return View();
         }
 

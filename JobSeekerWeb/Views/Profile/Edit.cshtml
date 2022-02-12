@@ -31,11 +31,11 @@
                                     {
                                         <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile picture1" class="avatar-img rounded-circle">
                                     }
-                                    else if (!Model.picture.Contains("http://"))
+                                    else if (!Model.picture.Contains("https://"))
                                     {
                                         <img src="~/DatabaseImg/@Model.picture" alt="profile picture2" class="avatar-img rounded-circle">
                                     }
-                                    else if (Model.picture.Contains("http://"))
+                                    else if (Model.picture.Contains("https://"))
                                     {
                                         <img src=@Model.picture alt="profile picture3" class="avatar-img rounded-circle">
                                     }

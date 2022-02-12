@@ -15,6 +15,14 @@ namespace JobSeeker.Controllers
         // GET: Dashboard
         public ActionResult Overview()
         {
+            if(CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
+            else
+            {
+
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
@@ -41,10 +49,16 @@ namespace JobSeeker.Controllers
             }
 
             return View((Object)CustomSession.GetSession());        
+            }
         }
 
         public ActionResult MyJobs()
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 int id = Convert.ToInt32(CustomSession.GetSession().get("id"));
@@ -57,6 +71,11 @@ namespace JobSeeker.Controllers
         static int? currentJobId;
         public ActionResult JobApplications(int? id)
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 currentJobId = id;
@@ -94,6 +113,11 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult HireUser(int? applicantId)
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 var instance = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == currentJobId).SingleOrDefault();
@@ -107,12 +131,22 @@ namespace JobSeeker.Controllers
         }
         public ActionResult CreateJob()
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             return View((Object)CustomSession.GetSession());
         }
 
         [HttpPost]
         public ActionResult CreateJob(job job, HttpPostedFileBase[] jobImages, HttpPostedFileBase[] jobFiles)
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 job.posted_by = Convert.ToInt32(CustomSession.GetSession().get("id"));

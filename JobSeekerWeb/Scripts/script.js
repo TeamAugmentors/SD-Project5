@@ -1,6 +1,9 @@
 function map(x, in_min, in_max, out_min, out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+window.onbeforeunload = function () { location.reload(); };
+
 if (document.URL.includes("/Team/Member")) {
     // =================================================
     // team page Animation
