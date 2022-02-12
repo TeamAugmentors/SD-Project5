@@ -8,9 +8,9 @@ namespace JobSeekerWeb.CustomUtils
 {
     public static class DatabaseConnector
     {
-        private static jobseekerWebEntities5 db = new jobseekerWebEntities5();
+        private static jobseekerWebEntities db = new jobseekerWebEntities();
 
-        public static jobseekerWebEntities5 getConnection()
+        public static jobseekerWebEntities getConnection()
         {
             return db;
         }
