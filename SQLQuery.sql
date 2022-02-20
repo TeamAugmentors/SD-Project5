@@ -10,6 +10,8 @@ CREATE TABLE users (
   picture varchar(500) NULL,
   ban int NOT NULL DEFAULT 0,
   token varchar(2000) NULL,
+  verified int DEFAULT 0 NOT NULL,
+  verifylink varchar(35) NULL,
 )
 
 
@@ -134,6 +136,13 @@ SELECT * FROM job
 SELECT * FROM jobfiles
 SELECT * FROM jobimages
 
+--DELETE table
+delete from users
+delete from hirer
+delete from freelancer
+delete from job
+delete from jobfiles
+delete from jobimages
 
 --Drop tables
 drop table users
@@ -143,3 +152,4 @@ drop table job
 drop table jobfiles
 drop table jobimages
 SELECT * FROM job 
+

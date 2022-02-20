@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Verify";
+    Layout = null;
+    string link = ViewBag.Link;
+}
+
+
+
+@{
+    if (link.IsEmpty())
+    {
+        <h2>We have sent a verification link to your email address</h2>
+    }
+    else
+    {
+        <h2>Verifying your account, Please wait</h2>
+    }
+}
