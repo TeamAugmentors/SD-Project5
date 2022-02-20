@@ -38,16 +38,8 @@ namespace JobSeeker.Controllers
                     CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
                         new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture, null });
 
-                    //ViewBag.otp = true;
-                    //break;
                     Response.Redirect("/Dashboard/Overview#dashboard__overview");
                 }
-                //if (ViewBag.otp == null)
-                //{
-                //    HttpContext.Server.ClearError();
-                //    // Response.Headers.Clear();
-                //    HttpContext.Response.Redirect("/User/SignUp", false);
-                //}
             }
             return View();
         }
@@ -91,6 +83,7 @@ namespace JobSeeker.Controllers
                     makeInstances(user.mail);
 
                     //send mail
+                    sendMail(user.mail, user.verifylink);
 
                     Response.Redirect("SignIn");
                 }
@@ -160,6 +153,23 @@ namespace JobSeeker.Controllers
             return View();
         }
 
+        public ActionResult Verify(string link)
+        {
+            ViewBag.Link = link;
+            if (ModelState.IsValid)
+            {
+                user user = DatabaseConnector.getConnection().users.Where(temp => temp.verifylink == link).SingleOrDefault();
+
+                if (user != null)
+                {
+                    user.verified = 1;
+                    DatabaseConnector.getConnection().SaveChanges();
+                    SignIn(user);
+                }
+            }
+            return View();
+        }
+
         public void makeInstances(string mail)
         {
             if (ModelState.IsValid && mail != null)
@@ -175,6 +185,33 @@ namespace JobSeeker.Controllers
                 DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query2);
             }
 
+        }
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public void sendMail(string mailAddress, string link)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("jobseekerIntel@tech.com");
+            mail.To.Add(mailAddress);
+            mail.Subject = "JobSeeker Verification";
+            mail.Body = "Please click the link to verify your JobSeeker account " + "https://localhost:44301/" + "User/Verify?link=" + link;
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("jobseekerbangladeshonline@gmail.com", "Secretplace");
+
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
         }
 
     }
