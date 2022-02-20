@@ -18,6 +18,11 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult SignIn(user user)
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             string query = "SELECT * FROM users";
             List<user> u = DatabaseConnector.getConnection().users.SqlQuery(query).ToList();
             foreach (var x in u)
@@ -33,8 +38,16 @@ namespace JobSeeker.Controllers
                     CustomSession.GetSession().set(new String[] { "id", "name", "mail", "username", "phoneNo", "billingInfo", "picture", "token" },
                         new Object[] { x.id, x.name, x.mail, x.user_name, x.phone_no, x.billing_info, x.picture, null });
 
+                    //ViewBag.otp = true;
+                    //break;
                     Response.Redirect("/Dashboard/Overview#dashboard__overview");
                 }
+                //if (ViewBag.otp == null)
+                //{
+                //    HttpContext.Server.ClearError();
+                //    // Response.Headers.Clear();
+                //    HttpContext.Response.Redirect("/User/SignUp", false);
+                //}
             }
             return View();
         }
@@ -46,18 +59,28 @@ namespace JobSeeker.Controllers
         }
         public ActionResult SignIn()
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult SignUp(user user)
         {
+            if (CustomSession.GetSession().get("mail") != null)
+            {
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
+            }
             //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
             if (ModelState.IsValid)
             {
-                string email = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.mail).SingleOrDefault();
+                string email = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.mail).SingleOrDefault();   
 
-                if (email == null)
+                if(email == null)
                 {
                     user.verifylink = RandomString(35);
 
@@ -68,7 +91,6 @@ namespace JobSeeker.Controllers
                     makeInstances(user.mail);
 
                     //send mail
-                    sendMail(user.mail, user.verifylink);
 
                     Response.Redirect("SignIn");
                 }
@@ -130,27 +152,13 @@ namespace JobSeeker.Controllers
 
         public ActionResult SignUp()
         {
-
-            return View();
-        }
-
-        public ActionResult Verify(string link)
-        {
-            ViewBag.Link = link;
-            if (ModelState.IsValid)
+            if (CustomSession.GetSession().get("mail") != null)
             {
-                user user = DatabaseConnector.getConnection().users.Where(temp => temp.verifylink == link).SingleOrDefault();
-
-                if (user != null)
-                {
-                    user.verified = 1;
-                    DatabaseConnector.getConnection().SaveChanges();
-                    SignIn(user);
-                }
+                Response.Redirect("/Dashboard/Overview#dashboard__overview");
+                return null;
             }
             return View();
         }
-
 
         public void makeInstances(string mail)
         {
@@ -167,33 +175,6 @@ namespace JobSeeker.Controllers
                 DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query2);
             }
 
-        }
-
-        private static Random random = new Random();
-
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-        public void sendMail(string mailAddress, string link)
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("jobseekerIntel@tech.com");
-            mail.To.Add(mailAddress);
-            mail.Subject = "JobSeeker Verification";
-            mail.Body = "Please click the link to verify your JobSeeker account " + "https://localhost:44301/" + "User/Verify?link=" + link;
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("jobseekerbangladeshonline@gmail.com", "Secretplace");
-
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
         }
 
     }

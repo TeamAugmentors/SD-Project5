@@ -17,7 +17,12 @@ namespace JobSeeker.Controllers
         int[] jobIds = DatabaseConnector.getConnection().applications.Where(a => a.applied_id == id).Select(a => a.job_id).ToArray();
         public ActionResult Jobs()
         {
-            if(ModelState.IsValid)
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
+            if (ModelState.IsValid)
             {
                 List<job> jobList = DatabaseConnector.getConnection().jobs.Where(x => x.posted_by != id).ToList();
                 
@@ -29,7 +34,12 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult Jobs(int? tk_min, int? tk_max, string category = "None")
         {
-            if(ModelState.IsValid)
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
+            if (ModelState.IsValid)
             {
                 ViewBag.tk_min = tk_min;    
                 ViewBag.tk_max = tk_max;    
@@ -51,6 +61,11 @@ namespace JobSeeker.Controllers
         [Route("Explore/JobDetails/{job_id}")]
         public ActionResult JobDetails(int job_id)
         {
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 var card = DatabaseConnector.getConnection().jobs.Where(temp => temp.id == job_id).SingleOrDefault();
@@ -85,8 +100,12 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult Apply(application application)
         {
-
-            if(ModelState.IsValid)
+            if (CustomSession.GetSession().get("mail") == null)
+            {
+                Response.Redirect("/User/SignIn");
+                return null;
+            }
+            if (ModelState.IsValid)
             {
                 string query = $"insert into applications values({application.job_id}, {application.applied_id})";
                 DatabaseConnector.getConnection().Database.ExecuteSqlCommand(query);
