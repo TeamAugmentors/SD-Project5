@@ -9,7 +9,7 @@ namespace JobSeekerWeb.CustomUtils
     {
 
         private static SessionObject session = new SessionObject();
-
+        //comment
         public static SessionObject GetSession()
         {
             return session; 

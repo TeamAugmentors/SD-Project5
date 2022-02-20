@@ -52,7 +52,7 @@ namespace JobSeeker.Controllers
         [HttpPost]
         public ActionResult SignUp(user user)
         {
-
+            //string query = $"INSERT INTO user (name, user_name, mail, password) VALUES ('{@user.name}', '{@user.user_name}', '{@user.mail}', '{@user.password}')";
             if (ModelState.IsValid)
             {
                 string email = DatabaseConnector.getConnection().users.Where(temp => temp.mail == user.mail).Select(temp => temp.mail).SingleOrDefault();
