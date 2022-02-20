@@ -50,7 +50,8 @@
             <div class="or-with-line">
                 <p>Or</p>
             </div>
-            <form method="POST" class="custom-form" action="/User/SignUp">
+            <form method="POST" class="custom-form" action="/User/SignUp" id="form">
+                <input type="text" name="url" id="url" class="d-none"/>
                 <div class="custom-form-group  name-and-username-form-group">
                     <div class="name-form-group">
                         <label class="form-label" for="name">Name</label>
@@ -85,9 +86,17 @@
                         </a>
                     </label>
                 </div>
-                <button type="submit" class="form-custom-button">Create Account</button>
+                <button type="button" onclick="submitForm()" class="form-custom-button">Create Account</button>
             </form>
         </div>
     </div>
 </div>
 
+<script>
+    var submitForm = () => {
+        var link = window.location.href.split(":");
+        var temp = link[2].split("/");
+        document.getElementById("url").value = link[0] + ":" + link[1] + ":"+ temp[0] + "/";
+        document.getElementById("form").submit();
+    }
+</script>

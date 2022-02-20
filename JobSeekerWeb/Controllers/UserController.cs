@@ -60,7 +60,7 @@ namespace JobSeeker.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(user user)
+        public ActionResult SignUp(user user, string url)
         {
             if (CustomSession.GetSession().get("mail") != null)
             {
@@ -83,7 +83,7 @@ namespace JobSeeker.Controllers
                     makeInstances(user.mail);
 
                     //send mail
-                    sendMail(user.mail, user.verifylink);
+                    sendMail(user.mail, user.verifylink, url);
 
                     Response.Redirect("SignIn");
                 }
@@ -196,7 +196,7 @@ namespace JobSeeker.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public void sendMail(string mailAddress, string link)
+        public void sendMail(string mailAddress, string link, string url)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
@@ -204,7 +204,7 @@ namespace JobSeeker.Controllers
             mail.From = new MailAddress("jobseekerIntel@tech.com");
             mail.To.Add(mailAddress);
             mail.Subject = "JobSeeker Verification";
-            mail.Body = "Please click the link to verify your JobSeeker account " + "https://localhost:44301/" + "User/Verify?link=" + link;
+            mail.Body = "Please click the link to verify your JobSeeker account " + url + "User/Verify?link=" + link;
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("jobseekerbangladeshonline@gmail.com", "Secretplace");
