@@ -205,7 +205,7 @@ namespace JobSeeker.Controllers
             mail.To.Add(mailAddress);
             mail.Subject = "JobSeeker Verification";
             mail.Body = "Please click the link to verify your JobSeeker account " + url + "User/Verify?link=" + link;
-
+            
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("jobseekerbangladeshonline@gmail.com", "Secretplace");
 

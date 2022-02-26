@@ -143,6 +143,8 @@ delete from freelancer
 delete from job
 delete from jobfiles
 delete from jobimages
+delete from activeorder
+delete from applications
 
 --Drop tables
 drop table users
