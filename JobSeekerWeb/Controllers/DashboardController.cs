@@ -124,6 +124,13 @@ namespace JobSeeker.Controllers
                 instance.hired_id = applicantId;
                 DatabaseConnector.getConnection().SaveChanges();
 
+                var instance2 = DatabaseConnector.getConnection().applications.Where(temp => temp.job_id == currentJobId).SingleOrDefault();
+                var q = "DELETE FROM APPLICATIONS WHERE job_id =" + currentJobId;
+                DatabaseConnector.getConnection().Database.ExecuteSqlCommand(q);
+
+                var order = DatabaseConnector.getConnection().activeorders.Add(new activeorder { job_id = (int)currentJobId, user_id = (int)applicantId });
+                DatabaseConnector.getConnection().SaveChanges();
+
                 return Redirect("MyJobs");
             }
 
